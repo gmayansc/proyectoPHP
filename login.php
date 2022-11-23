@@ -49,7 +49,6 @@ mysqli_close($conn);
     <nav class="navbar navbar-expand-lg bg-light">
       <div class="container">
         <a class="navbar-brand" href="#">Moodle PHP</a>
-        <a class="nav-link" href=""> <?php echo $extraidoEstudiantes['name'] . " " . $extraidoEstudiantes['surname'] ?></a>
       </div>
     </nav>
   </header>
@@ -67,7 +66,8 @@ mysqli_close($conn);
           <input type="password" class="form-control" id="inputPassword4" placeholder="12345678">
         </div>
         <div class="col-12">
-          <button type="submit" class="btn btn-primary">Entrar</button>
+          <button type="submit"  class="btn btn-primary" href="home.php">Entrar</a></button>
+          <p>¿Aún no tienes una cuenta? <a class="btn btn-primary" href="register.php">Registrarse</a>
         </div>
       </form>
     </div>
