@@ -3,22 +3,23 @@
 require_once "config.php";
 
 // Define variables and initialize with empty values
-$name = $description = $date_start =  $end_date = "";
-$name_err = $description_err = $date_start_err =  $end_date_err = "";
+$name = $description = $date_start =  $date_end = "";
+$name_err = $description_err = $date_start_err =  $date_end_err = "";
 
 // Processing form data when form is submitted
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    // Validate name
+
+    // Validamos el nombre
     $input_name = trim($_POST["name"]);
     if (empty($input_name)) {
         $name_err = "Por favor, introduce un nombre";
     } elseif (!filter_var($input_name, FILTER_VALIDATE_REGEXP, array("options" => array("regexp" => "/^[a-zA-Z\s]+$/")))) {
-        $name_err = "Please enter a valid name.";
+        $name_err = "Por favor introduce un nombre válido.";
     } else {
         $name = $input_name;
     }
 
-    // Validate description
+    // Validamos la descripción
     $input_description = trim($_POST["description"]);
     if (empty($input_description)) {
         $description_err = "Porfavor, introduce la descripción.";
@@ -26,63 +27,49 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $description = $input_description;
     }
 
-    // Validate date start
+    // Validamos la fecha de inicio
     $input_date_start = trim($_POST["date_start"]);
-    if (empty($input_description)) {
-        $description_err = "Please enter an description.";
+    if (empty($input_date_start)) {
+        $date_start_err = "Por favor, introduce una fecha de inicio.";
     } else {
-        $description = $input_description;
+        $date_start = $input_date_start;
     }
 
-    // Validate salary
-    $input_salary = trim($_POST["salary"]);
-    if (empty($input_salary)) {
-        $salary_err = "Please enter the salary amount.";
-    } elseif (!ctype_digit($input_salary)) {
-        $salary_err = "Please enter a positive integer value.";
+    // Validamos la fecha final
+    $input_date_end = trim($_POST["date_end"]);
+    if (empty($input_date_end)) {
+        $date_end_err = "Por favor, introduce una fecha de fin.";
+    } else if (strtotime($input_date_end) < strtotime($input_date_start)) {
+        $date_end_err = "La fecha de fin no puede ser anterior a la de inicio.";
     } else {
-        $salary = $input_salary;
+        $date_end = $input_date_end;
     }
 
-    // Check input errors before inserting in database
-    if (empty($name_err) && empty($description_err) && empty($salary_err)) {
-        // Prepare an insert statement
-        $sql = "INSERT INTO courses (name, description, date_start, date_end, active) VALUES (?, ?, ?, ?, ?)";
 
-        if ($stmt = mysqli_prepare($link, $sql)) {
-            // Bind variables to the prepared statement as parameters
-            mysqli_stmt_bind_param($stmt, "sss", $param_name, $param_description, $param_salary);
+    if (empty($name_err) && empty($description_err) && empty($date_start_err) && empty($date_end_err)) {
 
-            // Set parameters
-            $param_name = $name;
-            $param_description = $description;
-            $param_salary = $salary;
+        $sql = "INSERT INTO courses (name, description, date_start, date_end, active) VALUES ('$name', '$description', '$date_start', '$date_end', 0)";
 
-            // Attempt to execute the prepared statement
-            if (mysqli_stmt_execute($stmt)) {
-                // Records created successfully. Redirect to landing page
-                header("location: index.php");
-                exit();
-            } else {
-                echo "Oops! Something went wrong. Please try again later.";
-            }
+        echo $sql;
+        $resultat = mysqli_query($link, $sql);
+
+        if (!$resultat) {
+            echo "Error al insertar los datos. Inténtalo de nuevo.";
+        } else {
+            header("location: courses.php");
+            exit();
         }
-
-        // Close statement
-        mysqli_stmt_close($stmt);
+        mysqli_close($link);
     }
-
-    // Close connection
-    mysqli_close($link);
 }
 ?>
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 
 <head>
     <meta charset="UTF-8">
-    <title>Create Record</title>
+    <title>Crear Curso</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <style>
         .wrapper {
@@ -115,26 +102,19 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                         <div class="row">
                             <div class="form-group col-md-6">
                                 <label>Fecha de inicio</label>
-                                <input type="date" name="name" class="form-control <?php echo (!empty($name_err)) ? 'is-invalid' : ''; ?>" value="<?php echo $name; ?>">
-                                <span class="invalid-feedback"><?php echo $name_err; ?></span>
+                                <input type="date" name="date_start" class="form-control <?php echo (!empty($date_start_err)) ? 'is-invalid' : ''; ?>" value="<?php echo $date_start; ?>">
+                                <span class="invalid-feedback"><?php echo $date_start_err; ?></span>
                             </div>
 
                             <div class="form-group col-md-6">
                                 <label>Fecha de fin</label>
-                                <input type="date" name="name" class="form-control <?php echo (!empty($name_err)) ? 'is-invalid' : ''; ?>" value="<?php echo $name; ?>">
-                                <span class="invalid-feedback"><?php echo $name_err; ?></span>
+                                <input type="date" name="date_end" class="form-control <?php echo (!empty($date_end_err)) ? 'is-invalid' : ''; ?>" value="<?php echo $date_end; ?>">
+                                <span class="invalid-feedback"><?php echo $date_end_err; ?></span>
                             </div>
                         </div>
 
-                        <div class="form-group">
-                            <label>Activar curso</label>
-                            <input type="checkbox" name="name" class="form-control <?php echo (!empty($name_err)) ? 'is-invalid' : ''; ?>" value="<?php echo $name; ?>">
-                            <span class="invalid-feedback"><?php echo $name_err; ?></span>
-                        </div>
-
-
-                        <input type="submit" class="btn btn-primary" value="Submit">
-                        <a href="index.php" class="btn btn-secondary ml-2">Cancel</a>
+                        <input type="submit" class="btn btn-primary" value="Registrar curso">
+                        <a href="index.php" class="btn btn-secondary ml-2">Cancelar</a>
                     </form>
                 </div>
             </div>
