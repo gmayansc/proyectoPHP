@@ -3,8 +3,8 @@
 require_once "config.php";
 
 // Define variables and initialize with empty values
-$name = $description = $date_start =  $date_end = "";
-$name_err = $description_err = $date_start_err =  $date_end_err = "";
+$name = $description = $date_start =  $date_end = $active = "";
+$name_err = $description_err = $date_start_err =  $date_end_err = $active_err = "";
 
 // Processing form data when form is submitted
 if (isset($_POST["id_course"]) && !empty($_POST["id_course"])) {
@@ -46,14 +46,14 @@ if (isset($_POST["id_course"]) && !empty($_POST["id_course"])) {
     }
 
 
+    $_POST['active'] ? $active = "1" : $active = "0";
+
+
+
     // Check input errors before inserting in database
     if (empty($name_err) && empty($description_err) && empty($date_start_err) && empty($date_end_err)) {
         // Prepare an update statement
-        $sql = "UPDATE courses SET name= '$name', description='$description', date_start = '$date_start', date_end = '$date_end' WHERE id_course= $id_course";
-
-
-        echo $sql;
-
+        $sql = "UPDATE courses SET name= '$name', description='$description', date_start = '$date_start', date_end = '$date_end', active = '$active' WHERE id_course= $id_course";
         $resultat = mysqli_query($link, $sql);
         if (!$resultat) {
             echo "Error al insertar los datos. Inténtalo de nuevo.";
@@ -110,7 +110,7 @@ if (isset($_POST["id_course"]) && !empty($_POST["id_course"])) {
 
 <head>
     <meta charset="UTF-8">
-    <title>Update Record</title>
+    <title>Actualizar Curso</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <style>
         .wrapper {
@@ -125,16 +125,16 @@ if (isset($_POST["id_course"]) && !empty($_POST["id_course"])) {
         <div class="container-fluid">
             <div class="row">
                 <div class="col-md-12">
-                    <h2 class="mt-5">Update Record</h2>
-                    <p>Please edit the input values and submit to update the employee record.</p>
+                    <h2 class="mt-5">Actualizar curso</h2>
+                    <p>Edita los datos de este formulario para actualizar la información del curso.</p>
                     <form action="<?php echo htmlspecialchars(basename($_SERVER['REQUEST_URI'])); ?>" method="post">
                         <div class="form-group">
-                            <label>Name</label>
+                            <label>Nombre del curso</label>
                             <input type="text" name="name" class="form-control <?php echo (!empty($name_err)) ? 'is-invalid' : ''; ?>" value="<?php echo $name; ?>">
                             <span class="invalid-feedback"><?php echo $name_err; ?></span>
                         </div>
                         <div class="form-group">
-                            <label>Descripción</label>
+                            <label>Descripción del curso</label>
                             <textarea name="description" class="form-control <?php echo (!empty($description_err)) ? 'is-invalid' : ''; ?>"><?php echo $description; ?></textarea>
                             <span class="invalid-feedback"><?php echo $description_err; ?></span>
                         </div>
@@ -144,9 +144,14 @@ if (isset($_POST["id_course"]) && !empty($_POST["id_course"])) {
                             <span class="invalid-feedback"><?php echo $date_start_err; ?></span>
                         </div>
                         <div class="form-group">
-                            <label>Fecha inicio</label>
+                            <label>Fecha fin</label>
                             <input type="date" name="date_end" class="form-control <?php echo (!empty($date_end_err)) ? 'is-invalid' : ''; ?>" value="<?php echo $date_end; ?>">
                             <span class="invalid-feedback"><?php echo $date_end_err; ?></span>
+                        </div>
+                        <div class="form-group">
+                            <label>Activo</label>
+                            <input type="checkbox" name="active" <?php echo (($active == 1)) ? 'checked' : ''; ?> class="form-control <?php echo (!empty($active_err)) ? 'is-invalid' : ''; ?>" value= "VALUEactive">
+                            <span class="invalid-feedback"><?php echo $active_err; ?></span>
                         </div>
                         <input type="hidden" name="id_course" value="<?php echo $id_course; ?>" />
                         <input type="submit" class="btn btn-primary" value="Modificar">

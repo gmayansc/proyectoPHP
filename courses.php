@@ -66,9 +66,8 @@
                                             echo "<td> NO </td>";
                                         }
                                         echo "<td>";
-                                            echo '<a href="read.php?id_course='. $row['id_course'] .'" class="mr-3" title="View Record" data-toggle="tooltip"><span class="fa fa-eye"></span></a>';
                                             echo '<a href="update-courses.php?id_course='. $row['id_course'] .'" class="mr-3" title="Update Record" data-toggle="tooltip"><span class="fa fa-pencil"></span></a>';
-                                            echo '<a href="delete.php?id_course='. $row['id_course'] .'" title="Delete Record" data-toggle="tooltip"><span class="fa fa-trash"></span></a>';
+                                            echo '<a href="delete-courses.php?id_course='. $row['id_course'] .'" title="Delete Record" data-toggle="tooltip"><span class="fa fa-trash"></span></a>';
                                         echo "</td>";
                                     echo "</tr>";
                                 }
