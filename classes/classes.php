@@ -75,7 +75,7 @@
                                         echo "<td>" . $row['day'] . "</td>";
                                         echo "<td>" . $row['time_start'] . "</td>";
                                         echo "<td>" . $row['time_end'] . "</td>";
-                                        echo "<td>" . $row['color'] . "</td>";
+                                        echo "<td><div style='height: 30px; width:100%; background-color:".$row['color']."; border-radius: 2px;'></td>";
 
                                         echo "<td>";
                                             echo '<a href="update-classes.php?id_class='. $row['id_class'] .'" class="mr-3" title="Update Record" data-toggle="tooltip"><span class="fa fa-pencil"></span></a>';

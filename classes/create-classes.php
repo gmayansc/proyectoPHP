@@ -204,7 +204,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                             </div>
                         </div>
                         <input type="submit" class="btn btn-primary" value="Añadir nueva clase">
-                        <a href="index.php" class="btn btn-secondary ml-2">Cancelar</a>
+                        <a href="classes.php" class="btn btn-secondary ml-2">Cancelar</a>
                     </form>
                 </div>
             </div>
