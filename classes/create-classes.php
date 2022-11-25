@@ -81,20 +81,21 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     if (empty($name_err) && empty($color_err) && empty($time_start_err) && empty($time_end_err) && empty($date_err) && empty($course_err) && empty($teacher_err)) {
 
-        $sql = "BEGIN;
-        INSERT INTO class ( name, id_teacher, id_schedule, id_course, color) VALUES ('$name', $teacher, 0, $course, '$color');
-        INSERT INTO schedule ( id_class, time_start, time_end, day) VALUES ( INSERT_LAST_ID() , '$time_start', '$time_end', '$date');
-        COMMIT";
-        mysqli_query($link, $sql);
+        $sql = "INSERT INTO class ( name, id_teacher, id_schedule, id_course, color) VALUES ('$name', $teacher, 0, $course, '$color');
+        INSERT INTO schedule ( id_class, time_start, time_end, day) VALUES ( LAST_INSERT_ID() , '$time_start', '$time_end', '$date');
+        UPDATE class SET id_schedule = LAST_INSERT_ID() WHERE id_schedule = 0 ;";
+        
+        
+        $resultat = mysqli_multi_query($link, $sql);
 
-        echo $sql;
-
-        // if (!$resultat) {
-        //     echo "Error al insertar los datos. Inténtalo de nuevo.";
-        // } else {
-        //     header("location: classes.php");
-        //     exit();
-        // }
+        
+        if (!$resultat) {
+            echo $sql;
+            echo "Error al insertar los datos. Inténtalo de nuevo.";
+        } else {
+            header("location: classes.php");
+            exit();
+        }
         mysqli_close($link);
     }
 }
