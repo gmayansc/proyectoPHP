@@ -2,7 +2,7 @@
 // Process delete operation after confirmation
 if(isset($_POST["id_course"]) && !empty($_POST["id_course"])){
     // Include config file
-    require_once "config.php";
+    require_once "../config.php";
     
 
     $id_course = trim($_POST["id_course"]);
