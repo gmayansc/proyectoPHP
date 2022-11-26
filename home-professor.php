@@ -39,7 +39,7 @@ mysqli_close($conn);
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Aplicación Backend PHP</title>
+    <title>Panel de administración</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
 </head>
 
@@ -53,20 +53,17 @@ mysqli_close($conn);
         </nav>
     </header>
 
-    <br><a class="btn btn-primary" href="edit-profile.php" style="margin-left: 45%;">Edita tu perfil</a><a class="btn btn-primary" href="logout.php" style="margin-left: 3%;">Cerrar Sesión</a>
-
     <section class="container">
     <div class="student-info mt-5 mb-5">
-        <h2 class="student-info__title">Detalles del estudiante</h2>
+        <h2 class="student-info__title">Detalles del Profesor:</h2>
         <div>Nombre: <?php echo $extraidoEstudiantes['name']?> </div>
         <div>Apellido: <?php echo $extraidoEstudiantes['surname']?> </div>
         <div>Email: <?php echo $extraidoEstudiantes['email']?> </div>
         <div>Nombre usuario: <?php echo $extraidoEstudiantes['username']?> </div>
-        <div>Teléfono: <?php echo $extraidoEstudiantes['telephone']?> </div>
+        <div>Teléfono: <?php echo $extraidoEstudiantes['phone']?> </div>
         <div>NIF: <?php echo $extraidoEstudiantes['nif']?> </div>
         <div>Fecha de registro: <?php echo $extraidoEstudiantes['date_registered']?> </div>
     </div>
-
 
     <div class="student-schedule mt-5 mb-5">
     <h2 class="student-schedule__title">Tus horarios</h2>
@@ -95,15 +92,6 @@ mysqli_close($conn);
         <div>Día: <?php echo $extraidoHorarios['day']?> </div>
     </div>
 
-
-    <div class="student-teachers mt-5 mb-5">
-    <h2 class="student-teachers__title">Tus profesores</h2>
-        <div>Id horario: <?php echo $extraidoHorarios['id_schedule']?> </div>
-        <div>Id clase: <?php echo $extraidoHorarios['id_class']?> </div>
-        <div>Hora de inicio: <?php echo $extraidoHorarios['time_start']?> </div>
-        <div>Hora de fin: <?php echo $extraidoHorarios['time_end']?> </div>
-        <div>Día: <?php echo $extraidoHorarios['day']?> </div>
-    </div>
 
     </section>
 </body>

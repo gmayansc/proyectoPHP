@@ -1,35 +1,23 @@
 <?php
-$servername = "localhost:8889";
-$database = "producto 2";
-$username = "root";
-$password = "root";
-// Create connection
-$conn = mysqli_connect($servername, $username, $password, $database);
-// Check connection
-if (!$conn) {
-  die("Connection failed: " . mysqli_connect_error());
-}
-$tildes = $conn->query("SET NAMES 'utf8'"); //Para que se muestren las tildes
-$result = mysqli_query($conn, "SELECT * FROM students WHERE 1");
-mysqli_data_seek($result, 0);
-$extraidoEstudiantes = mysqli_fetch_array($result);
-mysqli_free_result($result);
-mysqli_close($conn);
 
-// Create connection
-$conn = mysqli_connect($servername, $username, $password, $database);
-// Check connection
-if (!$conn) {
-  die("Connection failed: " . mysqli_connect_error());
-}
-$tildes = $conn->query("SET NAMES 'utf8'"); //Para que se muestren las tildes
-$result = mysqli_query($conn, "SELECT * FROM schedule WHERE 1");
-mysqli_data_seek($result, 0);
-$extraidoHorarios = mysqli_fetch_array($result);
-mysqli_free_result($result);
-mysqli_close($conn);
+  session_start();
 
+  require 'conexion.php';
 
+  if (!empty($_POST['email']) && !empty($_POST['password'])) {
+    $records = $conn->prepare('SELECT id, email, password FROM users WHERE email = :email');
+    $records->bindParam(':email', $_POST['email']);
+    $records->execute();
+    $results = $records->fetch(PDO::FETCH_ASSOC);
+
+    $message = '';
+
+    if (count($results) > 0 && password_verify($_POST['password'], $results['password'])) {
+      $_SESSION['user_id'] = $results['id'];
+    } else {
+      $message = 'Sorry, those credentials do not match';
+    }
+  }
 
 ?>
 
@@ -45,10 +33,16 @@ mysqli_close($conn);
 </head>
 
 <body>
+
+  <?php if(!empty($message)): ?>
+    <p> <?= $message ?></p>
+  <?php endif; ?>
+
   <header>
     <nav class="navbar navbar-expand-lg bg-light">
       <div class="container">
         <a class="navbar-brand" href="#">Moodle PHP</a>
+        <a class="nav-link" href=""> <?php echo $extraidoEstudiantes['name'] ." ". $extraidoEstudiantes['surname']?></a>
       </div>
     </nav>
   </header>
@@ -56,7 +50,7 @@ mysqli_close($conn);
   <section class="container justify-content-center row">
     <div class="student-info col-8 mt-5 mb-5">
       <h2 class="student-info__title mb-3">Iniciar sesión</h2>
-      <form class="row g-3">
+      <form class="row g-3"  action="login.php" method="POST">
         <div class="col-md-12">
           <label for="inputEmail4" class="form-label">Email</label>
           <input type="email" class="form-control" id="inputEmail4" placeholder="j.perez@uoc.edu">
@@ -66,8 +60,11 @@ mysqli_close($conn);
           <input type="password" class="form-control" id="inputPassword4" placeholder="12345678">
         </div>
         <div class="col-12">
-          <button type="submit"  class="btn btn-primary" href="home.php">Entrar</a></button>
-          <p>¿Aún no tienes una cuenta? <a class="btn btn-primary" href="register.php">Registrarse</a>
+          <button type="submit"  class="btn btn-primary" href="home.php">Entrar</a></button><br>
+          <p>¿Aún no tienes una cuenta? <a class="btn btn-primary" href="register.php">Registrarse</a><br>
+          <p>Para entrar cómo administrador: <a class="btn btn-primary" href="login-admin.php">Click aquí</a><br>
+          <a class="btn btn-primary" href="logout.php">Cerrar Sesión</a><br>
+          
         </div>
       </form>
     </div>
@@ -76,3 +73,4 @@ mysqli_close($conn);
 </body>
 
 </html>
+
