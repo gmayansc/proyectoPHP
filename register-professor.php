@@ -1,29 +1,36 @@
 <?php
 
+session_start();
+$admin_id = $_SESSION['admin_id'];
+
+if (empty($admin_id)) {
+    header("location: teachers.php");
+}
+
 require 'database.php';
 
 $message = '';
 
-if (!empty($_POST['email']) && !empty($_POST['password'])) {
-  $sql = "INSERT INTO users_admin(username, name, email, password)
-    values(:username, :name, :email, :password)";
+if (!empty($_POST['email'])) {
+  $sql = "INSERT INTO teachers (name, surname, telephone, nif,  email)
+    values(:name, :surname, :telephone, :nif,  :email)";
 
   $sql = $conn->prepare($sql);
 
-  $password = password_hash($_POST['password'], PASSWORD_BCRYPT);
-
-  $username = $_POST['username'];
   $name = $_POST['name'];
+  $surname = $_POST['surname'];
   $email = $_POST['email'];
-  $pass = $_POST['password'];
+  $telephone = $_POST['telephone'];
+  $nif = $_POST['nif'];
 
-  $sql->bindParam(':username', $username, PDO::PARAM_STR, 100);
+  $sql->bindParam(':surname', $surname, PDO::PARAM_STR, 100);
   $sql->bindParam(':name', $name, PDO::PARAM_STR, 100);
   $sql->bindParam(':email', $email, PDO::PARAM_STR, 100);
-  $sql->bindParam(':password', $password, PDO::PARAM_STR, 100);
+  $sql->bindParam(':telephone', $telephone, PDO::PARAM_STR, 100);
+  $sql->bindParam(':nif', $nif, PDO::PARAM_STR, 100);
 
   if ($sql->execute()) {
-    $message = 'Professor registrado correctamente!';
+    header("location: home-admin.php");
   } else {
     $message = 'ERROR: No ha sido posible completar el registro.';
   }
@@ -42,6 +49,21 @@ if (!empty($_POST['email']) && !empty($_POST['password'])) {
 </head>
 
 <body>
+  <header>
+    <nav class="navbar navbar-expand-lg bg-light">
+      <div class="container">
+        <a class="navbar-brand" href="home-admin.php">Moodle PHP</a>
+        <div class="left_navbar d-flex gap-4">
+                    <a class="nav-link" href="edit-profile.php"> <?php echo  '<i class="bi bi-person-circle" style="margin-right: 10px"></i><b>' . $_SESSION['admin_name'] . "</b>"; ?>
+                        <?php if (!empty($_SESSION['admin_id'])) {
+                            echo '<a class="nav-link" href="logout.php">Cerrar sesión</a>';
+                        } else {
+                            echo '';
+                        }; ?></a>
+                </div>
+      </div>
+    </nav>
+  </header>
 
   <div class="container">
 
@@ -49,34 +71,41 @@ if (!empty($_POST['email']) && !empty($_POST['password'])) {
       <p> <?= $message ?></p>
     <?php endif; ?>
 
-    <section class="container">
-    <div class="student-info mt-5 mb-5">
-      <h2 class="student-info__title align-center mb-3">Registro de Profesores:</h2>
-      <form class="row g-3" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
-        <div class="col-md-4">
-          <label for="inputEmail4" class="form-label">Nombre</label>
-          <input type="text" class="form-control" name="name" id="inputEmail4" placeholder="Nombre">
-        </div>
-        <div class="col-md-4">
-          <label for="inputEmail4" class="form-label">Nombre de usuario</label>
-          <input type="text" class="form-control" name="username" id="inputEmail4" placeholder="Usuario">
-        </div>
-        <div class="col-md-8">
-          <label for="inputEmail4" class="form-label">Email</label>
-          <input type="email" class="form-control" name="email" id="inputEmail4" placeholder="Email">
-        </div>
-        <div class="col-md-4">
-          <label for="inputPassword4" class="form-label">Contraseña</label>
-          <input type="password" class="form-control" name="password" id="inputPassword4" placeholder="Password">
-        </div>
-        <div class="col-12">
-          <input type="submit" value="Registrarme como administrador"><br><br>
-          <a class="btn btn-primary" href="login-admin.php">Iniciar Sesión cómo Profesor</a>
-        </div>
-      </form>
-    </div>
+    <section class="container row">
+      <div class="student-info col-9 mt-5 mb-5">
+        <h2 class="student-info__title align-center mb-3">Registro de Profesores:</h2>
+        <form class="row g-3" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
+          <h4>Datos personales</h4>
+          <div class="col-md-3">
+            <label for="inputEmail4" class="form-label">Nombre</label>
+            <input type="text" class="form-control" name="name" required placeholder="Nombre">
+          </div>
+          <div class="col-md-3">
+            <label for="inputEmail4" class="form-label">Apellido</label>
+            <input type="text" class="form-control" name="surname" required placeholder="Apellido">
+          </div>
+          <div class="col-md-3">
+            <label for="inputEmail4" class="form-label">NIF</label>
+            <input type="text" class="form-control" name="nif" placeholder="NIF">
+          </div>
 
-  </section>
+          <div class="col-md-3">
+            <label for="inputEmail4" class="form-label">Teléfono</label>
+            <input type="text" class="form-control" name="telephone" placeholder="Usuario">
+          </div>
+
+          <h4>Email de acceso</h4>
+          <div class="col-md-8">
+            <label for="inputEmail4" class="form-label">Email</label>
+            <input type="email" class="form-control" name="email" id="inputEmail4" placeholder="Email">
+          </div>
+          <div class="col-12">
+            <button type="submit" class="btn btn-primary">Registrar profesor</a></button><br>
+          </div>
+        </form>
+      </div>
+
+    </section>
 
 
   </div>

@@ -13,7 +13,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>Todos los alumnos</title>
+    <title>Todos los profesores</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
@@ -52,49 +52,46 @@
             </div>
         </nav>
     </header>
-        <div class="container">
+    <div class="wrapper">
+        <div class="container-fluid">
             <div class="row">
-                <div class="col-md-18">
+                <div class="col-md-12">
                     <div class="mt-5 mb-3 clearfix">
-                        <h2 class="pull-left">Todos los alumnos</h2>
-                        <a href="register-professor.php" class="btn btn-success pull-right"><i class="fa fa-plus"></i> Añadir nuevo alumno</a>
+                        <h2 class="pull-left">Todos los profesores</h2>
+                        <a href="register-professor.php" class="btn btn-success pull-right"><i class="fa fa-plus"></i> Añadir nuevo profesor</a>
                     </div>
                     <?php
                     // Include config file
                     require "config.php";
 
                     // Attempt select query execution
-                    $sql = "SELECT * FROM students";
+                    $sql = "SELECT * FROM teachers";
                     if ($result = mysqli_query($link, $sql)) {
                         if (mysqli_num_rows($result) > 0) {
                             echo '<table class="table table-bordered table-striped">';
                             echo "<thead>";
                             echo "<tr>";
                             echo "<th>#</th>";
-                            echo "<th>Nombre de usuario</th>";
                             echo "<th>Nombre</th>";
                             echo "<th>Apellido</th>";
                             echo "<th>NIF</th>";
                             echo "<th>Teléfono</th>";
                             echo "<th>Email</th>";
-                            echo "<th>Fecha de registro</th>";
                             echo "<th>Editar</th>";
                             echo "</tr>";
                             echo "</thead>";
                             echo "<tbody>";
                             while ($row = mysqli_fetch_array($result)) {
                                 echo "<tr>";
-                                echo "<td>" . $row['id'] . "</td>";
-                                echo "<td>" . $row['username'] . "</td>";
+                                echo "<td>" . $row['id_teacher'] . "</td>";
                                 echo "<td>" . $row['name'] . "</td>";
                                 echo "<td>" . $row['surname'] . "</td>";
                                 echo "<td>" . $row['nif'] . "</td>";
                                 echo "<td>" . $row['telephone'] . "</td>";
                                 echo "<td>" . $row['email'] . "</td>";
-                                echo "<td>" . $row['date_registered'] . "</td>";
                                 echo "<td>";
-                                echo '<a href="edit-profile.php?id=' . $row['id'] . '" class="mr-3" title="Update alumno" data-toggle="tooltip"><span class="fa fa-pencil"></span></a>';
-                                echo '<a href="delete-student.php?id=' . $row['id'] . '" title="Delete alumno" data-toggle="tooltip"><span class="fa fa-trash"></span></a>';
+                                echo '<a href="update-teachers.php?id_teacher=' . $row['id_teacher'] . '" class="mr-3" title="Update Record" data-toggle="tooltip"><span class="fa fa-pencil"></span></a>';
+                                echo '<a href="delete-teachers.php?id_teacher=' . $row['id_teacher'] . '" title="Delete Record" data-toggle="tooltip"><span class="fa fa-trash"></span></a>';
                                 echo "</td>";
                                 echo "</tr>";
                             }
@@ -116,6 +113,7 @@
                     ?>
                 </div>
             </div>
+        </div>
     </div>
 </body>
 

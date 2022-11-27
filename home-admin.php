@@ -1,53 +1,10 @@
 <?php
-session_start();
-$student_id = $_SESSION['admin_id'];
+    session_start();
+    $admin_id = $_SESSION['admin_id'];
 
-if (empty($student_id)) {
-    header("location: login-admin.php");
-}
-
-$servername = "localhost:8889";
-$database = "producto 2";
-$username = "root";
-$password = "root";
-// Create connection
-$conn = mysqli_connect($servername, $username, $password, $database);
-// Check connection
-if (!$conn) {
-    die("Connection failed: " . mysqli_connect_error());
-}
-$tildes = $conn->query("SET NAMES 'utf8'"); //Para que se muestren las tildes
-$result = mysqli_query($conn, "SELECT * FROM students WHERE 1");
-mysqli_data_seek($result, 0);
-$extraidoEstudiantes = mysqli_fetch_array($result);
-mysqli_free_result($result);
-mysqli_close($conn);
-
-// Create connection
-$conn = mysqli_connect($servername, $username, $password, $database);
-// Check connection
-if (!$conn) {
-    die("Connection failed: " . mysqli_connect_error());
-}
-$tildes = $conn->query("SET NAMES 'utf8'"); //Para que se muestren las tildes
-$current_classesSQL = "SELECT schedule.time_start, teachers.name as Profesor, schedule.day as Dia,
-courses.name as Curso, students.name as Alumno, class.name as Asignatura FROM enrollment
-INNER JOIN courses ON courses.id_course = enrollment.id_course
-INNER JOIN class ON enrollment.id_course = class.id_course
-INNER JOIN teachers ON class.id_teacher = teachers.id_teacher
-INNER JOIN schedule ON class.id_schedule = schedule.id_schedule
-INNER JOIN students ON enrollment.id_student = students.id
-WHERE enrollment.id_student = $student_id;";
-$resultadoClases = mysqli_query($conn, $current_classesSQL);
-mysqli_data_seek($resultadoClases, 0);
-
-
-$current_cursosSQL = "SELECT courses.name as Curso FROM courses";
-$resultadoCursos = mysqli_query($conn, $current_cursosSQL);
-mysqli_data_seek($resultadoCursos, 0);
-
-
-
+    if (empty($admin_id)) {
+        header("location: login-admin.php");
+    }
 
 ?>
 

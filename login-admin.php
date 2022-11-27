@@ -49,7 +49,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Panel de administración</title>
+  <title>Moodle PHP - Iniciar sesión</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
 </head>
 <body>
@@ -59,7 +59,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         <a class="navbar-brand" href="#">Moodle PHP</a>
       </div>
     </nav>
-  </header>
+  </header> 
   <div class="container d-flex justify-content-center align-items-center flex-column " style="height:70vh">
  
     <h2 class="student-info__title mb-3 text-center">Iniciar sesión</h2>
