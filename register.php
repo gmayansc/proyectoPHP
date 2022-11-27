@@ -1,42 +1,41 @@
-
 <?php
 
 require 'database.php';
 
-$message = '';
 
-if (!empty($_POST['email']) && !empty($_POST['pass'])) {
-  $sql = "INSERT INTO students(username, pass, email, name, surname, telephone, nif, date_registered)
+$message = $error_message = '';
+
+$sql = "INSERT INTO students(username, pass, email, name, surname, telephone, nif, date_registered)
     values(:username, :pass, :email, :name, :surname, :telephone, :nif, :date_registered)";
 
-  $sql = $conn->prepare($sql);
+$stmt = $conn->prepare($sql);
 
-  $password = password_hash($_POST['pass'], PASSWORD_BCRYPT);
+$password = $_POST['password'];
 
-  $name = $_POST['name'];
-  $surname = $_POST['surname'];
-  $username = $_POST['username'];
-  $email = $_POST['email'];
-  $pass = $_POST['pass'];
-  $telephone = $_POST['telephone'];
-  $nif = $_POST['nif'];
-  $date_registered = '2022-01-01 00:00:00';
+$name = $_POST['name'];
+$surname = $_POST['surname'];
+$username = $_POST['username'];
+$email = $_POST['email'];
+$pass = $_POST['pass'];
+$telephone = $_POST['telephone'];
+$nif = $_POST['nif'];
+$date_registered =  date('Y-m-d H:i:s');
 
-  $sql->bindParam(':name', $name, PDO::PARAM_STR, 100);
-  $sql->bindParam(':username', $username, PDO::PARAM_STR, 100);
-  $sql->bindParam(':pass', $password, PDO::PARAM_STR, 100);
-  $sql->bindParam(':email', $email, PDO::PARAM_STR, 100);
-  $sql->bindParam(':surname', $surname, PDO::PARAM_STR, 100);
-  $sql->bindParam(':telephone', $telephone, PDO::PARAM_STR, 100);
-  $sql->bindParam(':nif', $nif, PDO::PARAM_STR, 100);
-  $sql->bindParam(':date_registered', $date_registered, PDO::PARAM_STR, 100);
+$stmt->bindParam(':name', $name, PDO::PARAM_STR, 100);
+$stmt->bindParam(':username', $username, PDO::PARAM_STR, 100);
+$stmt->bindParam(':pass', $password, PDO::PARAM_STR, 100);
+$stmt->bindParam(':email', $email, PDO::PARAM_STR, 100);
+$stmt->bindParam(':surname', $surname, PDO::PARAM_STR, 100);
+$stmt->bindParam(':telephone', $telephone, PDO::PARAM_STR, 100);
+$stmt->bindParam(':nif', $nif, PDO::PARAM_STR, 100);
+$stmt->bindParam(':date_registered', $date_registered, PDO::PARAM_STR, 100);
 
-  if ($sql->execute()) {
-    $message = '¡Usuario registrado correctamente!';
-  } else {
-    $message = 'ERROR: No ha sido posible completar el registro.';
-  }
+if ($stmt->execute()) {
+  $success_message = 'Tu usuario ha sido registrado con éxito.';
+} else {
+  $message = 'ERROR: No ha sido posible completar el registro.';
 }
+
 
 ?>
 
@@ -49,76 +48,95 @@ if (!empty($_POST['email']) && !empty($_POST['pass'])) {
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Panel de administración</title>
+  <title>Registrar nuevo estudiante</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
 </head>
 
-<?php if(isset($_SESSION['completado'])): ?>
-            <div class="alerta alerta-exito">
-                <?= $_SESSION['completado']; ?>
-            </div>
-            <?php elseif(isset($_SESSION['errores']['general'])): ?>
-            <div class="alerta alerta-error">
-                <?= $_SESSION['errores'] ['general']; ?>
-            </div>            
-        <?php endif; ?>      
+<?php if (isset($_SESSION['completado'])) : ?>
+  <div class="alerta alerta-exito">
+    <?= $_SESSION['completado']; ?>
+  </div>
+<?php elseif (isset($_SESSION['errores']['general'])) : ?>
+  <div class="alerta alerta-error">
+    <?= $_SESSION['errores']['general']; ?>
+  </div>
+<?php endif; ?>
 
 <body>
   <header>
     <nav class="navbar navbar-expand-lg bg-light">
       <div class="container">
-        <a class="navbar-brand" href="#">Moodle PHP</a>
+        <a class="navbar-brand" href="index.php">Moodle PHP</a>
         <!-- <a class="nav-link" href=""> <?php echo $extraidoEstudiantes['name'] . " " . $extraidoEstudiantes['surname'] ?></a> -->
       </div>
     </nav>
   </header>
 
-  <?php if (!empty($message)) : ?>
-      <p> <?= $message ?></p>
-    <?php endif; ?>
+  <div class="container d-flex justify-content-center align-items-center flex-column " style="height:70vh">
 
-  <section class="container">
-    <div class="student-info mt-5 mb-5">
-      <h2 class="student-info__title align-center mb-3">Registro de usuarios</h2>
-      <form class="row g-3" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
-        <div class="col-md-4">
-          <label for="inputEmail4" class="form-label">Nombre</label>
-          <input type="text" class="form-control" name="name" id="inputEmail4" placeholder="Juan">
+    <h2 class="student-info__title mb-3 text-center">Regístrate aquí: </h2>
+    <div class="card col-6">
+      <div class="card-header">
+        <ul class="nav nav-tabs card-header-tabs">
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="true" href="#">Soy estudiante</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="register-admin.php">Soy administrador</a>
+          </li>
+        </ul>
+      </div>
+      <div class="card-body d-flex justify-content-center">
+        <div class="student-info col-10 ">
+          <form class="row g-3 mb-3" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
+            <h5 class="mt-5">Datos personales</h5>
+            <div class="col-md-4">
+              <label for="inputEmail4" class="form-label">Nombre</label>
+              <input type="text" class="form-control" name="name" placeholder="Juan">
+            </div>
+            <div class="col-md-4">
+              <label for="inputEmail4" class="form-label">Apellido</label>
+              <input type="text" class="form-control" name="surname" placeholder="Pérez">
+            </div>
+            <div class="col-md-4">
+              <label for="inputEmail4" class="form-label">Nombre de usuario</label>
+              <input type="text" class="form-control" name="username" placeholder="@jperez94">
+            </div>
+            <h5 class="mt-5">Tus datos de acceso</h5>
+            <div class="col-md-8">
+              <label for="inputEmail4" class="form-label">Email</label>
+              <input type="email" class="form-control" name="email" placeholder="j.perez@uoc.edu">
+            </div>
+            <div class="col-md-4">
+              <label for="inputPassword4" class="form-label">Contraseña</label>
+              <input type="password" class="form-control" name="password"  placeholder="12345678">
+            </div>
+            <h5 class="mt-5">Otra información</h5>
+            <div class="col-4">
+              <label for="inputAddress" class="form-label">Teléfono</label>
+              <input type="text" class="form-control" name="telephone" placeholder="+34 600 123 444">
+            </div>
+            <div class="col-4">
+              <label for="inputAddress2" class="form-label">NIF</label>
+              <input type="text" class="form-control" name="nif" placeholder="41888772X">
+            </div>
+            <div class="col-12">
+              <input type="submit" class="btn mt-3 btn-primary" value="Registrarme como estudiante"><br>
+            </div>
+          </form>
+          <?php
+          if (!empty($error_message)) {
+            echo '<div class="alert alert-danger" role="alert">' .
+              $error_message . '
+            </div>';
+          } else {
+            echo !empty($success_message) ? '<div class="alert alert-success" role="alert">' . $success_message . '
+            Por favor, <a href="index.php">inicia sesión.</a></div>' : '';
+          }
+          ?>
+
+          ¿Ya tienes cuenta? <a href="index.php">Inicia sesión aquí.</a>
         </div>
-        <div class="col-md-4">
-          <label for="inputEmail4" class="form-label">Apellido</label>
-          <input type="text" class="form-control" name="surname" id="inputEmail4" placeholder="Pérez">
-        </div>
-        <div class="col-md-4">
-          <label for="inputEmail4" class="form-label">Nombre de usuario</label>
-          <input type="text" class="form-control" name="username" id="inputEmail4" placeholder="@jperez94">
-        </div>
-        <div class="col-md-8">
-          <label for="inputEmail4" class="form-label">Email</label>
-          <input type="email" class="form-control" name="email" id="inputEmail4" placeholder="j.perez@uoc.edu">
-        </div>
-        <div class="col-md-4">
-          <label for="inputPassword4" class="form-label">Contraseña</label>
-          <input type="password" class="form-control" name="password" id="inputPassword4" placeholder="12345678">
-        </div>
-        <div class="col-4">
-          <label for="inputAddress" class="form-label">Teléfono</label>
-          <input type="text" class="form-control" name="telephone" id="inputAddress" placeholder="+34 600 123 444">
-        </div>
-        <div class="col-4">
-          <label for="inputAddress2" class="form-label">NIF</label>
-          <input type="text" class="form-control" name="nif" id="inputAddress2" placeholder="41888772X">
-        </div>
-        <div class="col-12">
-        <input type="submit" value="Registrarme cómo estudiante"><br>
-          <a class="btn btn-primary" href="login.php">Iniciar Sesión Estudiante</a>
-        </div>
-      </form>
+      </div>
     </div>
-
-  </section>
 </body>
-
-
-
-

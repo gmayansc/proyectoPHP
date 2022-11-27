@@ -1,3 +1,59 @@
-* {
-    color: white;
+.administrator-panel a {
+text-decoration: none;
+padding: unset;
+}
+.mis_datos{
+    background-color: #f8f8f8;
+    border-radius: 14px;
+    padding:  25px 50px;
+    border: 1px solid lightgray;
+}
+.mi_calendario{
+    background-color: #f8f8f8;
+    padding:  25px 50px;
+}
+
+.mis_clases{
+    background-color: #212529;
+    border-radius: 14px;
+    border: 3px solid;
+    padding:  25px 50px;
+}
+
+.matricula_cursos{
+    background-color: #f8f8f8;
+    border-radius: 14px;
+    padding:  25px 50px;
+    border: 1px solid lightgray;
+}
+
+.large {
+    height: 300px
+}
+
+.add_card {
+    border-radius: 14px;
+    padding:  25px 50px;
+}
+
+.add_card:hover{
+    opacity: 0.8;
+}
+
+.blue{
+    background-color: blueviolet;
+}
+
+.green{
+    background-color: lightseagreen;
+    
+}
+
+.orange{
+    background-color: coral;
+
+}
+
+.purple{
+
 }
