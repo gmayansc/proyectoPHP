@@ -138,14 +138,9 @@ mysqli_data_seek($resultadoCursos, 0);
                     </div></a>
                 </div>
 
-
             </div>
 
-
-
         </div>
-
-
 
 
     </section>

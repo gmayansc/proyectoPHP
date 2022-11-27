@@ -124,7 +124,7 @@ if (isset($_POST["id_course"]) && !empty($_POST["id_course"])) {
 <header>
         <nav class="navbar navbar-expand-lg bg-light">
             <div class="container">
-                <a class="navbar-brand" href="#">Moodle PHP</a>
+                <a class="navbar-brand" href="../home-admin.php">Moodle PHP</a>
             </div>
         </nav>
     </header>
