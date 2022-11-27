@@ -42,7 +42,7 @@ $resultadoClases = mysqli_query($conn, $current_classesSQL);
 mysqli_data_seek($resultadoClases, 0);
 
 
-$current_cursosSQL = "SELECT courses.name as Curso FROM courses";
+$current_cursosSQL = "SELECT courses.name as Curso,  courses.id_course as id_curso FROM courses";
 $resultadoCursos = mysqli_query($conn, $current_cursosSQL);
 mysqli_data_seek($resultadoCursos, 0);
 
@@ -70,7 +70,7 @@ mysqli_data_seek($resultadoCursos, 0);
             <div class="container">
                 <a class="navbar-brand" href="">Moodle PHP</a>
                 <div class="left_navbar d-flex gap-4">
-                    <a class="nav-link" href="edit-profile.php"> <?php echo  '<i class="bi bi-person-circle" style="margin-right: 10px"></i><b>' . $_SESSION['student_name'] . " " . $_SESSION['student_surname'] . "</b>"; ?>
+                    <a class="nav-link" href="modify-profile.php?student_id=<?php echo $_SESSION['student_id']?>"> <?php echo  '<i class="bi bi-person-circle" style="margin-right: 10px"></i><b>' . $_SESSION['student_name'] . " " . $_SESSION['student_surname'] . "</b>"; ?>
                         <?php if (!empty($_SESSION['student_name'])) {
                             echo '<a class="nav-link" href="logout.php">Cerrar sesión</a>';
                         } else {
@@ -80,14 +80,14 @@ mysqli_data_seek($resultadoCursos, 0);
             </div>
         </nav>
     </header>
-    <section class="container">
+    <section class="container mb-5">
 
 
         <div class="row mt-5 gap-3 justify-content-between">
 
             <div class="mis_datos col">
                 <div class="student-info">
-                    <h2 class="student-info__title"><i class="bi bi-person-circle" style="margin-right: 10px"></i>Mis datos:</h2>
+                    <h2 class="student-info__title mb-4"><i class="bi bi-person-circle" style="margin-right: 10px"></i>Mis datos:</h2>
                     <div><b>Nombre:</b> <?php echo $extraidoEstudiantes['name'] ?> </div>
                     <div><b>Apellido:</b> <?php echo $extraidoEstudiantes['surname'] ?> </div>
                     <div><b>Email:</b> <?php echo $extraidoEstudiantes['email'] ?> </div>
@@ -95,6 +95,7 @@ mysqli_data_seek($resultadoCursos, 0);
                     <div><b>Teléfono:</b> <?php echo $extraidoEstudiantes['telephone'] ?> </div>
                     <div><b>NIF: </b><?php echo $extraidoEstudiantes['nif'] ?> </div>
                     <div><b>Fecha de registro:</b> <?php echo $extraidoEstudiantes['date_registered'] ?> </div>
+                    <div class="mt-2"><a href="modify-profile.php?student_id=<?php echo $student_id?>"> <i role="button" class="bi bi-pencil-square"> <b> Editar perfil </b></i></a></div>
                 </div>
             </div>
 
@@ -151,7 +152,7 @@ mysqli_data_seek($resultadoCursos, 0);
                     while ($row = mysqli_fetch_array($resultadoCursos)) {
                         echo "<tr>";
                         echo "<td>" . $row['Curso'] . "</td>";
-                        echo "<td> <i role='button' class='bi bi-plus-square-fill'> Añadir a mis cursos </i>";
+                        echo "<td> <a href='enrollment.php?student_id=".$student_id."&id_course=" . $row['id_curso'] . "'><i role='button' class='bi bi-plus-square-fill'> Añadir a mis cursos </i></a>";
                         echo "</tr>";
                     }
                     mysqli_free_result($resultadoCursos);

@@ -54,7 +54,7 @@ if (!empty($_POST['email'])) {
       <div class="container">
         <a class="navbar-brand" href="home-admin.php">Moodle PHP</a>
         <div class="left_navbar d-flex gap-4">
-                    <a class="nav-link" href="edit-profile.php"> <?php echo  '<i class="bi bi-person-circle" style="margin-right: 10px"></i><b>' . $_SESSION['admin_name'] . "</b>"; ?>
+                    <a class="nav-link" href="#"> <?php echo  '<i class="bi bi-person-circle" style="margin-right: 10px"></i><b>' . $_SESSION['admin_name'] . "</b>"; ?>
                         <?php if (!empty($_SESSION['admin_id'])) {
                             echo '<a class="nav-link" href="logout.php">Cerrar sesión</a>';
                         } else {

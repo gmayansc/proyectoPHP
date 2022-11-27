@@ -120,7 +120,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <header>
         <nav class="navbar navbar-expand-lg bg-light">
             <div class="container">
-                <a class="navbar-brand" href="#">Moodle PHP</a>
+                <a class="navbar-brand" href="../home-admin.php">Moodle PHP</a>
             </div>
         </nav>
     </header>

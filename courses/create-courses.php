@@ -121,7 +121,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                         </div>
 
                         <input type="submit" class="btn btn-primary" value="Registrar curso">
-                        <a href="index.php" class="btn btn-secondary ml-2">Cancelar</a>
+                        <a href="courses.php" class="btn btn-secondary ml-2">Cancelar</a>
                     </form>
                 </div>
             </div>

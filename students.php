@@ -42,7 +42,7 @@
             <div class="container">
                 <a class="navbar-brand" href="home-admin.php">Moodle PHP</a>
                 <div class="left_navbar d-flex gap-4">
-                    <a class="nav-link" href="edit-profile.php"> <?php echo  '<i class="bi bi-person-circle" style="margin-right: 10px"></i><b>' . $_SESSION['admin_name'] . "</b>"; ?>
+                    <a class="nav-link" href="#"> <?php echo  '<i class="bi bi-person-circle" style="margin-right: 10px"></i><b>' . $_SESSION['admin_name'] . "</b>"; ?>
                         <?php if (!empty($_SESSION['admin_id'])) {
                             echo '<a class="nav-link" href="logout.php">Cerrar sesión</a>';
                         } else {
@@ -93,7 +93,7 @@
                                 echo "<td>" . $row['email'] . "</td>";
                                 echo "<td>" . $row['date_registered'] . "</td>";
                                 echo "<td>";
-                                echo '<a href="edit-profile.php?id=' . $row['id'] . '" class="mr-3" title="Update alumno" data-toggle="tooltip"><span class="fa fa-pencil"></span></a>';
+                                echo '<a href="modify-profile.php?id=' . $row['id'] . '" class="mr-3" title="Update alumno" data-toggle="tooltip"><span class="fa fa-pencil"></span></a>';
                                 echo '<a href="delete-student.php?id=' . $row['id'] . '" title="Delete alumno" data-toggle="tooltip"><span class="fa fa-trash"></span></a>';
                                 echo "</td>";
                                 echo "</tr>";
@@ -106,8 +106,6 @@
                             echo '<div class="alert alert-danger"><em>No se ha encontrado ningún curso.</em></div>';
                         }
                     } else {
-                        echo"ASDADS";
-
                         echo "Oops! Algo ha ido mal. Por favor, inténtelo de nuevo.";
                     }
 
