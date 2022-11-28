@@ -21,7 +21,7 @@ if (isset($_POST["student_id"]) && !empty($_POST["student_id"])) {
     $name = $_POST["name"];
     $surname = $_POST["surname"];
     $username = $_POST["username"];
-    $password = $_POST["pass"];
+    $password = $_POST["password"];
     $telephone = $_POST["telephone"];
     $email = $_POST["email"];
     $nif = $_POST["nif"];
