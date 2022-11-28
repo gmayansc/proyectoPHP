@@ -57,7 +57,6 @@
                 <div class="col-md-18">
                     <div class="mt-5 mb-3 clearfix">
                         <h2 class="pull-left">Todos los alumnos</h2>
-                        <a href="register-professor.php" class="btn btn-success pull-right"><i class="fa fa-plus"></i> Añadir nuevo alumno</a>
                     </div>
                     <?php
                     // Include config file
@@ -103,7 +102,7 @@
                             // Free result set
                             mysqli_free_result($result);
                         } else {
-                            echo '<div class="alert alert-danger"><em>No se ha encontrado ningún curso.</em></div>';
+                            echo '<div class="alert alert-danger"><em>No se ha encontrado ningún alumno.</em></div>';
                         }
                     } else {
                         echo "Oops! Algo ha ido mal. Por favor, inténtelo de nuevo.";

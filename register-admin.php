@@ -10,7 +10,7 @@ if (!empty($_POST['email']) && !empty($_POST['password'])) {
 
   $sql = $conn->prepare($sql);
 
-  $password = password_hash($_POST['password'], PASSWORD_BCRYPT);
+  $password = $_POST['password'];
 
   $username = $_POST['username'];
   $name = $_POST['name'];

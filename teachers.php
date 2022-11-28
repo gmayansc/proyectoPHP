@@ -100,7 +100,7 @@
                             // Free result set
                             mysqli_free_result($result);
                         } else {
-                            echo '<div class="alert alert-danger"><em>No se ha encontrado ningún curso.</em></div>';
+                            echo '<div class="alert alert-danger"><em>No se ha encontrado ningún profesor.</em></div>';
                         }
                     } else {
                         echo"ASDADS";
