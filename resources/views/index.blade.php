@@ -28,7 +28,7 @@
             <a class="nav-link active" aria-current="true" href="#">Como estudiante</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="login-admin.php">Como administrador {{$test}}</a>
+            <a class="nav-link" href="login-admin.php">Como administrador</a>
           </li>
         </ul>
       </div>

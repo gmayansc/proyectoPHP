@@ -8,8 +8,7 @@ class LoginController extends Controller
 {
 
     public function index() {
-        $test = "HOLITA";
-        return view('index', ["test" => $test]);
+        return view('index');
     }
 
     public function test(){
