@@ -4,11 +4,11 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 
-class LoginController extends Controller
+class RegisterAdminController extends Controller
 {
     
     public function getRoute() {
-        return view('index');
+        return view('register-admin');
     }
 
 }

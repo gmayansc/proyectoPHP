@@ -2,9 +2,20 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\LoginAdminController;
+use App\Http\Controllers\RegisterController;
+use App\Http\Controllers\RegisterAdminController;
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\CourseController;
 
 
-Route::get('/',[LoginController::class, 'index']);
+Route::get('/',[LoginController::class, 'getRoute']);
+Route::get('/login-admin',[LoginAdminController::class, 'getRoute']);
+Route::get('/register',[RegisterController::class, 'getRoute']);
+Route::get('/register-admin',[RegisterAdminController::class, 'getRoute']);
+Route::get('/home',[HomeController::class, 'getRoute']);
+Route::get('/courses',[CourseController::class, 'getRoute']);
+
 
 /*
 
@@ -37,3 +48,13 @@ Route::get('/update-courses');
 Route::get('/update-teachers');
 */
 
+
+
+Route::get('/leer', function(){
+
+    $students = App\Models\Student::all();
+    
+    foreach($students as $student) {
+        echo $student->name . " | " . $student->surname . "<br>";
+    }
+});

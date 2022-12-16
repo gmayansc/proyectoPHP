@@ -28,7 +28,7 @@
             <a class="nav-link active" aria-current="true" href="#">Como estudiante</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="login-admin.php">Como administrador</a>
+            <a class="nav-link" href="login-admin">Como administrador</a>
           </li>
         </ul>
       </div>
@@ -55,7 +55,7 @@
           }
           ?>
 
-          ¿No tienes cuenta? <a href="register.php">Regístrate aquí.</a>
+          ¿No tienes cuenta? <a href="register">Regístrate aquí.</a>
         </div>
       </div>
     </div>
