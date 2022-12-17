@@ -36,8 +36,8 @@ Route::post('/delete-courses', [CourseController::class, 'deleteCourse']);
 
 //CLASSES ROUTES
 Route::get('/classes',[ClasseController::class, 'getRoute']);
-Route::post('/classes', [CourseController::class, 'createCourse']);
-Route::post('/delete-classes', [CourseController::class, 'deleteCourse']);
+Route::post('/classes', [ClasseController::class, 'createClasse']);
+Route::post('/delete-classes', [ClasseController::class, 'deleteClasse']);
 
 
 /*

@@ -34,7 +34,6 @@
                             </h2>
                             <div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse show" aria-labelledby="panelsStayOpen-headingOne">
                                 <div class="accordion-body">
-
                                     <table class="table table-bordered table-striped">
                                         <thead>
                                             <tr>
@@ -53,11 +52,13 @@
                                             <tr>
                                                 <td>{{$classe->id}}</td>
                                                 <td>{{$classe->name}}</td>
-                                                <td>{{$classe->id_teacher}}</td>
+                                                <td>{{$classe->teacher->name}}</td>
                                                 <td>{{$classe->schedule->day}}</td>
                                                 <td>{{$classe->schedule->time_start}}</td>
                                                 <td>{{$classe->schedule->time_end}}</td>
-                                                <td><div style="height: 30px; width:100%; background-color:{{$classe->color}}; border-radius:2px;"></td>
+                                                <td>
+                                                    <div style="height: 30px; width:100%; background-color:{{$classe->color}}; border-radius:2px;">
+                                                </td>
                                                 <td>
                                                     <form method='POST' action='/delete-classes'>
                                                         @csrf
@@ -80,39 +81,57 @@
                             </h2>
                             <div id="panelsStayOpen-collapseTwo" class="accordion-collapse collapse" aria-labelledby="panelsStayOpen-headingTwo">
                                 <div class="accordion-body">
-
-                                    <form method='POST' class="col-5" action='/classes'>
+                                    <h2>Crear nueva clase</h2>
+                                    <form class="col-5 m-auto" method='POST' action='/classes'>
                                         @csrf
                                         <div>
-                                            <input class='form-control mb-2' placeholder='Nombre del curso' name='name' />
-                                        </div>
-                                        <div>
-                                            <input class='form-control mb-2' placeholder='Descripción del curso' name='description' />
-                                        </div>
-                                        <div>
-                                            <label for="date_start">Fecha de inicio</label>
-                                            <input class='form-control mb-2' placeholder='Fecha de inicio' type='date' name='date_start' />
-                                        </div>
-                                        <div>
-                                            <label for="date_end">Fecha de fin</label>
-                                            <input class='form-control mb-2' placeholder='Fecha de fin' type='date' name='date_end' />
-                                        </div>
-                                        <div>
-                                            <select class='form-control mb-2' name='active'>
-                                                <option value='1'>Activo</option>
-                                                <option value='0'>Inactivo</option>
+                                            <span>Escoja el profesor</span>
+                                            <select class='form-control mb-2' placeholder='Nombre del profesor' name='id_teacher'>
+                                                @foreach ($teachers as $teacher)
+                                                <option disabled selected>Seleccione</option>
+                                                <option value="{{ $teacher->id_teacher }}">{{ $teacher->name }}</option>
+                                                @endforeach
                                             </select>
                                         </div>
-                                        <button class="btn btn-primary" type='submit'>Añadir</button>
-                                    </form>
+                                        <div>
+                                            <span>Escoja el curso</span>
+                                            <select class='form-control mb-2' placeholder='Nombre del curso' name='id_course'>
+                                                @foreach ($courses as $course)
+                                                <option disabled selected>Seleccione</option>
+                                                <option value="{{ $course->id }}">{{ $course->name }}</option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                        <div>
+                                            <span>Nombre de la clase</span>
+                                            <input  class='form-control mb-2'placeholder='Nombre de la clase' name='name' />
+                                        </div>
+                                        <div>
+                                            <span>Color de la clase</span>
+                                            <input class='form-control mb-2' placeholder='Color de la clase' type='color' name='color'/>
+                                        </div>
+                                        <div>
+                                            <span>Horario de la clase</span>
+                                            <select class='form-control mb-2' placeholder='Horario para la clase' name='id_schedule'>
+                                                <option disabled selected>Seleccione</option>
+                                                @foreach ($schedules as $schedule)
+                                                <option value='{{ $schedule->id_schedule }}'>Fecha: {{ $schedule->day }} | Hora Inicio: {{ $schedule->time_start }} | Hora fin: {{ $schedule->time_end}}</option>
+                                                @endforeach
+                                            </select>
+                                        </div>
                                 </div>
+                                <div class="text-center">
+                                    <button class="btn btn-primary align-center col-4" type='submit'>Añadir clase</button>
+                                </div>
+                                </form>
                             </div>
                         </div>
                     </div>
-
                 </div>
+
             </div>
         </div>
+    </div>
     </div>
     <!-- JavaScript Bundle with Popper -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>

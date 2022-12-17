@@ -12,4 +12,5 @@ class Teacher extends Model
     protected $hidden = [
         'pass',
     ];
+    protected $primaryKey = 'id_teacher';
 }
