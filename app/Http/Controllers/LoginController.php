@@ -8,7 +8,8 @@ class LoginController extends Controller
 {
     
     public function getRoute() {
-        return view('index');
+        $invalid = false;
+        return view('index', ['invalid' => $invalid]);
     }
 
 }

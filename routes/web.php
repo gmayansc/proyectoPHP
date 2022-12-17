@@ -6,15 +6,38 @@ use App\Http\Controllers\LoginAdminController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\RegisterAdminController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\HomeAdminController;
 use App\Http\Controllers\CourseController;
+use App\Http\Controllers\ClasseController;
+use App\Http\Controllers\Authentication;
 
 
+
+//LOGIN AND REGISTER ROUTES (AUTH)
 Route::get('/',[LoginController::class, 'getRoute']);
+Route::get('/login-check',[Authentication::class, 'login']);
 Route::get('/login-admin',[LoginAdminController::class, 'getRoute']);
 Route::get('/register',[RegisterController::class, 'getRoute']);
+Route::get('/register-student',[Authentication::class, 'register']);
+
 Route::get('/register-admin',[RegisterAdminController::class, 'getRoute']);
+
+//HOME ROUTES
 Route::get('/home',[HomeController::class, 'getRoute']);
+Route::get('/home-admin',[HomeAdminController::class, 'getRoute']);
+
+
+
+//COURSES ROUTES
 Route::get('/courses',[CourseController::class, 'getRoute']);
+Route::post('/courses', [CourseController::class, 'createCourse']);
+Route::post('/delete-courses', [CourseController::class, 'deleteCourse']);
+
+
+//CLASSES ROUTES
+Route::get('/classes',[ClasseController::class, 'getRoute']);
+Route::post('/classes', [CourseController::class, 'createCourse']);
+Route::post('/delete-classes', [CourseController::class, 'deleteCourse']);
 
 
 /*
@@ -47,14 +70,3 @@ Route::get('/update-classes');
 Route::get('/update-courses');
 Route::get('/update-teachers');
 */
-
-
-
-Route::get('/leer', function(){
-
-    $students = App\Models\Student::all();
-    
-    foreach($students as $student) {
-        echo $student->name . " | " . $student->surname . "<br>";
-    }
-});

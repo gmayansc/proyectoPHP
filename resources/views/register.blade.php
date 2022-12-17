@@ -9,15 +9,6 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
 </head>
 
-<?php if (isset($_SESSION['completado'])) : ?>
-    <div class="alerta alerta-exito">
-        <?= $_SESSION['completado']; ?>
-    </div>
-<?php elseif (isset($_SESSION['errores']['general'])) : ?>
-    <div class="alerta alerta-error">
-        <?= $_SESSION['errores']['general']; ?>
-    </div>
-<?php endif; ?>
 
 <body>
     <header>
@@ -45,7 +36,9 @@
             </div>
             <div class="card-body d-flex justify-content-center">
                 <div class="student-info col-10 ">
-                    <form class="row g-3 mb-3" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
+
+                    <form class="row g-3 mb-3" action="/register-student" method="get">
+                    @csrf
                         <h5 class="mt-5">Datos personales</h5>
                         <div class="col-md-4">
                             <label for="inputEmail4" class="form-label">Nombre</label>
@@ -66,7 +59,7 @@
                         </div>
                         <div class="col-md-4">
                             <label for="inputPassword4" class="form-label">Contraseña</label>
-                            <input type="password" class="form-control" name="password" placeholder="12345678">
+                            <input type="password" class="form-control" name="pass" placeholder="12345678">
                         </div>
                         <h5 class="mt-5">Otra información</h5>
                         <div class="col-4">
@@ -81,16 +74,7 @@
                             <input type="submit" class="btn mt-3 btn-primary" value="Registrarme como estudiante"><br>
                         </div>
                     </form>
-                    <?php
-                    if (!empty($error_message)) {
-                        echo '<div class="alert alert-danger" role="alert">' .
-                            $error_message . '
-            </div>';
-                    } else {
-                        echo !empty($success_message) ? '<div class="alert alert-success" role="alert">' . $success_message . '
-            Por favor, <a href="/">inicia sesión.</a></div>' : '';
-                    }
-                    ?>
+                
 
                     ¿Ya tienes cuenta? <a href="/">Inicia sesión aquí.</a>
                 </div>

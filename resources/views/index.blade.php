@@ -34,7 +34,7 @@
       </div>
       <div class="card-body d-flex justify-content-center">
         <div class="student-info col-8 ">
-          <form class="row g-3 mb-3" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
+          <form class="row g-3 mb-3" action="/login-check" method="get">
             <div class="col-md-12">
               <label for="inputEmail4" class="form-label">Email</label>
               <input type="email" name="email" class="form-control" id="inputEmail4" required placeholder="j.perez@uoc.edu">
@@ -47,13 +47,10 @@
               <button type="submit" class="btn btn-primary">Entrar</a></button><br>
             </div>
           </form>
-          <?php
-          if (!empty($error_message)) {
-            echo '<div class="alert alert-danger" role="alert">' .
-              $error_message . '
-            </div>';
-          }
-          ?>
+        @if ($invalid)
+        <h2 style="color:red">Datos introducidos son incorrectos</h2>
+        @endif
+          
 
           ¿No tienes cuenta? <a href="register">Regístrate aquí.</a>
         </div>

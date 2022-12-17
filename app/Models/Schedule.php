@@ -5,8 +5,12 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Student extends Model
+class Schedule extends Model
 {
     use HasFactory;
-    protected $fillable = ['username', 'pass', 'email', 'name', 'surname', 'telephone', 'nif'];
+
+    protected $fillable = ['id_class', 'time_start', 'time_end', 'day'];
+    protected $primaryKey = 'id_schedule';
+
+
 }
