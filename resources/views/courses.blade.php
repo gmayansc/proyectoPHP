@@ -67,7 +67,7 @@
                                                 } ?>
                                                 <td>
                                                     <!-- <a href="update-courses.php?id={{$course->id}}" class="mr-3" title="Update Record" data-toggle="tooltip"><span class="fa fa-pencil"></span></a>
-                                    <a href="delete-courses?id='. $row['id'] .'" title="Delete Record" data-toggle="tooltip"></a> -->
+                                                    <a href="delete-courses?id='. $row['id'] .'" title="Delete Record" data-toggle="tooltip"></a> -->
 
                                                     <form method='POST' action='/delete-courses'>
                                                         @csrf

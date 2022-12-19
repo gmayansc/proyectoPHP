@@ -25,7 +25,8 @@ class Authentication extends BaseController
 
         if ($student) {
             if ($student->pass == $request->input('password')) {
-                return redirect('/home')->cookie('rol', 'ESTUDIANTE', 200)->cookie('id', $student->id, 200);
+                Cookie::queue('id', $student->id_student , 200);
+                return redirect('/home');
             }
             return view('index', ["invalid" => true]);
         }

@@ -25,6 +25,8 @@ Route::get('/register-admin',[RegisterAdminController::class, 'getRoute']);
 //HOME ROUTES
 Route::get('/home',[HomeController::class, 'getRoute']);
 Route::get('/home-admin',[HomeAdminController::class, 'getRoute']);
+Route::get('/modify-profile', [HomeController::class, 'getRoute']);
+Route::get('/calendar',[HomeController::class, 'getCalendar']);
 
 
 

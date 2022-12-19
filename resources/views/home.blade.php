@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="es">
 
@@ -10,6 +9,37 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
     <link rel="stylesheet" href="style.css">
+
+    <script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.0.0/index.global.min.js'></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+
+            var calendarEl = document.getElementById('calendar');
+
+            var calendar = new FullCalendar.Calendar(calendarEl, {
+                locale: 'es',
+                initialView: 'dayGridMonth',
+                initialDate: '2022-12-12',
+                headerToolbar: {
+                    center: 'dayGridMonth,timeGridWeek'
+                }, // buttons for switching between views
+                events: [{
+                        title: 'All Day Event',
+                        description: 'description for All Day Event',
+                        start: '2022-12-01'
+                    },
+                    {
+                        title: 'Long Event',
+                        description: 'description for Long Event',
+                        start: '2022-12-07',
+                        end: '2022-12-10'
+                    },
+                ]
+            });
+            calendar.render();
+        });
+    </script>
+
 </head>
 
 <body>
@@ -18,7 +48,7 @@
             <div class="container">
                 <a class="navbar-brand" href="">Moodle PHP</a>
                 <div class="left_navbar d-flex gap-4">
-                    <a class="nav-link" href="modify-profile.php?student_id=<?php echo 'test'?>"> <?php echo  '<i class="bi bi-person-circle" style="margin-right: 10px"></i><b>' . "_SESSION['student_name']" . " " . "_SESSION['student_surname']" . "</b>"; ?>
+                    <a class="nav-link" href="modify-profile.php?student_id=<?php echo 'test' ?>"><i class="bi bi-person-circle" style="margin-right: 10px"></i><b> {{ $student->name }} {{ $student->surname }} </b>
                         <?php if (!empty($_SESSION['student_name'])) {
                             echo '<a class="nav-link" href="logout.php">Cerrar sesión</a>';
                         } else {
@@ -36,21 +66,21 @@
             <div class="mis_datos col">
                 <div class="student-info">
                     <h2 class="student-info__title mb-4"><i class="bi bi-person-circle" style="margin-right: 10px"></i>Mis datos:</h2>
-                    <div><b>Nombre:</b> <?php echo "xtraidoEstudiantes['name']" ?> </div>
-                    <div><b>Apellido:</b> <?php echo "xtraidoEstudiantes['surname']" ?> </div>
-                    <div><b>Email:</b> <?php echo "xtraidoEstudiantes['email']" ?> </div>
-                    <div><b>Nombre usuario:</b> <?php echo "xtraidoEstudiantes['username']" ?> </div>
-                    <div><b>Teléfono:</b> <?php echo "xtraidoEstudiantes['telephone']" ?> </div>
-                    <div><b>NIF: </b><?php echo "xtraidoEstudiantes['nif']" ?> </div>
-                    <div><b>Fecha de registro:</b> <?php echo "xtraidoEstudiantes['date_registered']" ?> </div>
-                    <div class="mt-2"><a href="modify-profile.php?student_id=<?php echo "student_id"?>"> <i role="button" class="bi bi-pencil-square"> <b> Editar perfil </b></i></a></div>
+                    <div><b>Nombre:</b> {{$student->name}} </div>
+                    <div><b>Apellido:</b> {{$student->surname}} </div>
+                    <div><b>Email:</b> {{$student->email}} </div>
+                    <div><b>Nombre usuario:</b> {{$student->username}} </div>
+                    <div><b>Teléfono:</b> {{$student->telephone}} </div>
+                    <div><b>NIF: </b> {{$student->nif}} </div>
+                    <div><b>Fecha de registro:</b> {{$student->date_registered}} </div>
+                    <div class="mt-2"><a href="modify-profile"> <i role="button" class="bi bi-pencil-square"> <b> Editar perfil </b></i></a></div>
                 </div>
             </div>
 
 
-            <div class="mi_calendario col-4">
+            <div class="mi_calendario col-8">
                 <h2 class="mb-2">Calendario:</h2>
-
+                <div id="calendar"></div>
             </div>
 
         </div>
