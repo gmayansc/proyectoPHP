@@ -11,6 +11,7 @@ padding: unset;
 .mi_calendario{
     background-color: #f8f8f8;
     padding:  25px 50px;
+    border-radius: 14px;
 }
 
 .mis_clases{

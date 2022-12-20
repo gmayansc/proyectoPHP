@@ -16,6 +16,8 @@
 
             var calendarEl = document.getElementById('calendar');
 
+            console.log('{{$classes}}');
+
             var calendar = new FullCalendar.Calendar(calendarEl, {
                 locale: 'es',
                 initialView: 'dayGridMonth',
@@ -23,23 +25,17 @@
                 headerToolbar: {
                     center: 'dayGridMonth,timeGridWeek'
                 }, // buttons for switching between views
-                events: [{
-                        title: 'All Day Event',
-                        description: 'description for All Day Event',
-                        start: '2022-12-01'
-                    },
+                events: [
                     {
-                        title: 'Long Event',
-                        description: 'description for Long Event',
-                        start: '2022-12-07',
-                        end: '2022-12-10'
+                        title: 'Clase de prueba',
+                        description: 'Clase de prueba 1',
+                        start: '2022-12-07'
                     },
                 ]
             });
             calendar.render();
         });
     </script>
-
 </head>
 
 <body>
@@ -86,6 +82,7 @@
         </div>
 
 
+
         <div class="row mt-5 gap-3 justify-content-between">
 
             <div class="mis_clases col">
@@ -99,22 +96,17 @@
                         <th>Profesor</th>
                         <th>Más</th>
                     </tr>
-                    <?php
-                    /*
-                    while ($row = mysqli_fetch_array($resultadoClases)) {
-                        echo "<tr>";
-                        echo "<td>" . $row['Dia'] . "</td>";
-                        echo "<td>" . $row['Asignatura'] . "</td>";
-                        echo "<td>" . $row['Curso'] . "</td>";
-                        echo "<td>" . $row['time_start'] . "</td>";
-                        echo "<td>" . $row['Profesor'] . "</td>";
-                        echo "<td><i class='bi bi-three-dots'></i>";
-                        echo "</tr>";
-                    }
-                    mysqli_free_result($resultadoClases);
-                    mysqli_close($conn);*/
-                    ?>
+
+                    @foreach ($classes as $classe)
+                    <tr>
+                        <td>{{ $classe->schedule->day }}</td>
+                        <td>{{ $classe->name }}</td>
+                        <td>{{ $classe->name}}</td>
+                        <td>{{ $classe->schedule->time_start }}</td>
+                        <td>{{ $classe->teacher->name }}</td>
+                        <td> + </td>
                     </tr>
+                    @endforeach
                 </table>
             </div>
         </div>
@@ -127,6 +119,18 @@
                         <th>Título del curso</th>
                         <th>Matrícularme</th>
                     </tr>
+
+
+
+                    @foreach ($courses as $course)
+                    <tr>
+                        <td>{{ $course->name }}</td>
+                        <td> + </td>
+                    </tr>
+                    @endforeach
+
+
+
                     <?php /*
                     while ($row = mysqli_fetch_array($resultadoCursos)) {
                         echo "<tr>";

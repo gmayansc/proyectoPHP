@@ -72,7 +72,7 @@
                                                     <form method='POST' action='/delete-courses'>
                                                         @csrf
                                                         <input type='hidden' value='{{ $course->id }}' name='id' />
-                                                        <button type='submit'><span class="fa fa-trash"></span></button>
+                                                        <button type='submit'><span class="fa fa-trash">Borrar</span></button>
                                                     </form>
 
                                                 </td>
