@@ -25,13 +25,29 @@ class Authentication extends BaseController
 
         if ($student) {
             if ($student->pass == $request->input('password')) {
-                Cookie::queue('id', $student->id_student , 200);
+                Cookie::queue('id', $student->id_student, 200);
                 return redirect('/home');
             }
             return view('index', ["invalid" => true]);
         }
 
         return view('index', ["invalid" => true]);
+    }
+
+    // Login function
+    function loginAdmin(Request $request)
+    {
+        $admin = Admin::where('email', $request->input('email'))->first();
+
+        if ($admin) {
+            if ($admin->pass == $request->input('password')) {
+                Cookie::queue('id_admin', $admin->id_admin, 200);
+                return redirect('/home-admin');
+            }
+            return view('login-admin', ["invalid" => true]);
+        }
+
+        return view('login-admin', ["invalid" => true]);
     }
 
     // Sign in funtion

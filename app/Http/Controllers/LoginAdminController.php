@@ -8,7 +8,8 @@ class LoginAdminController extends Controller
 {
 
     public function getRoute() {
-        return view('login-admin');
+        $invalid = false;
+        return view('login-admin', ['invalid' => $invalid]);
     }
 
 }
