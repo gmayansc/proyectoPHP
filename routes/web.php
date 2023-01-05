@@ -22,6 +22,7 @@ Route::get('/register',[RegisterController::class, 'getRoute']);
 Route::get('/register-student',[Authentication::class, 'register']);
 
 Route::get('/register-admin',[RegisterAdminController::class, 'getRoute']);
+Route::get('/register-admin-check',[Authentication::class, 'registerAdmin']);
 
 //HOME ROUTES
 Route::get('/home',[HomeController::class, 'getRoute']);

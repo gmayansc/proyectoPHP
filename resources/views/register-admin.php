@@ -35,37 +35,27 @@
       </div>
       <div class="card-body d-flex justify-content-center">
         <div class="student-info col-10 ">
-          <form class="row g-3 mb-3" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
+          <form class="row g-3 mb-3" action="/register-admin-check" method="get">
             <div class="col-md-6">
               <label for="inputEmail4" class="form-label">Nombre</label>
-              <input type="text" class="form-control" name="name" id="inputEmail4" placeholder="Nombre">
+              <input type="text" class="form-control" name="name" placeholder="Nombre">
             </div>
             <div class="col-md-6">
               <label for="inputEmail4" class="form-label">Nombre de usuario</label>
-              <input type="text" class="form-control" name="username" id="inputEmail4" placeholder="Usuario">
+              <input type="text" class="form-control" name="username" placeholder="Usuario">
             </div>
             <div class="col-md-6">
               <label for="inputEmail4" class="form-label">Email</label>
-              <input type="email" class="form-control" name="email" id="inputEmail4" placeholder="Email">
+              <input type="email" class="form-control" name="email" placeholder="Email">
             </div>
             <div class="col-md-6">
               <label for="inputPassword4" class="form-label">Contraseña</label>
-              <input type="password" class="form-control" name="password" id="inputPassword4" placeholder="Password">
+              <input type="password" class="form-control" name="pass" placeholder="Password">
             </div>
             <div class="col-12">
               <input type="submit" class="btn mt-3 btn-primary" value="Registrarme como administrador"><br>
             </div>
           </form>
-          <?php
-          if (!empty($error_message)) {
-            echo '<div class="alert alert-danger" role="alert">' .
-              $error_message . '
-            </div>';
-          } else {
-            echo !empty($success_message) ? '<div class="alert alert-success" role="alert">' . $success_message . 's
-            Por favor, <a href="/">inicia sesión.</a></div>' : '';
-          }
-          ?>
 
           ¿Ya eres admin? <a href="login-admin">Inicia sesión aquí.</a>
         </div>

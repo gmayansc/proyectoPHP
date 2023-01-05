@@ -53,19 +53,6 @@ class Authentication extends BaseController
     // Sign in funtion
     function register(Request $request)
     {
-        // Creamos las reglas para validar la petición
-        // $rules = [
-        //     "username" => "required",
-        //     "pass" => "required|integer",
-        //     "email" => "required|email",
-        //     "name" => "required",
-        //     "surname" => "required",
-        //     "telephone" => "required",
-        //     "nif" => "required",
-        // ];
-
-        //     $request->validate($rules);
-
         try {
             Student::create([
                 "username" => $request->input('username'),
@@ -85,6 +72,29 @@ class Authentication extends BaseController
             return view('register');
         }
         return view('home');
+    }
+
+    // Sign in funtion
+    function registerAdmin(Request $request)
+    {
+        $variable = $request->input('name');
+echo "<script>console.log('$variable');</script>";  
+        try {
+            Admin::create([
+                "username" => $request->input('username'),
+                "pass" => $request->input('pass'),
+                "email" => $request->input('email'),
+                "name" => $request->input('name')
+            ]);
+        } catch (\Illuminate\Database\QueryException $e) {
+            // Si hay error duplicado
+            $errorCode = $e->errorInfo[1];
+            if ($errorCode == '1062') {
+                return view('register-admin', ["done" => false, "duplicado" => true]);
+            }
+            return view('register-admin');
+        }
+        return view('home-admin');
     }
 
 
