@@ -45,8 +45,8 @@
                 <a class="navbar-brand" href="">Moodle PHP</a>
                 <div class="left_navbar d-flex gap-4">
                     <a class="nav-link" href="modify-profile"><i class="bi bi-person-circle" style="margin-right: 10px"></i><b> {{ $student->name }} {{ $student->surname }} </b>
-                        <?php if (!empty($_SESSION['student_name'])) {
-                            echo '<a class="nav-link" href="logout.php">Cerrar sesión</a>';
+                        <?php if ($student->name) {
+                            echo '<a class="nav-link" href="/logout">Cerrar sesión</a>';
                         } else {
                             echo '';
                         }; ?></a>
@@ -71,6 +71,25 @@
                     <div><b>Fecha de registro:</b> {{$student->date_registered}} </div>
                     <div><b>Notificaciones:</b> NO </div>
                     <div class="mt-2"><a href="modify-profile"> <i role="button" class="bi bi-pencil-square"> <b> Editar perfil </b></i></a></div>
+                </div>
+                <div class="student-info mt-3">
+                    <h2 class="student-info__title mb-4"><i class="bi bi-journal-bookmark" style="margin-right: 10px"></i>Mis notas:</h2>
+                        <table class="table">
+                            <thead>
+                                <th>Fecha</th>
+                                <th>Nombre</th>
+                                <th>Nota</th>
+                            </thead>
+                            <tbody>
+                                    <tr><td>20-12-2022</td><td>Matemáticas</td><td>2.5</td></tr>
+                                    <tr><td>20-12-2022</td><td>Matemáticas</td><td>2.5</td></tr>
+                                    <tr><td>20-12-2022</td><td>Matemáticas</td><td>2.5</td></tr>
+                                    <tr><td>20-12-2022</td><td>Matemáticas</td><td>2.5</td></tr>
+                                    <tr><td>20-12-2022</td><td>Matemáticas</td><td>2.5</td></tr>
+                            </tbody>
+                        </table>
+                        <div class="mt-2"><a href="modify-profile"> <i role="button" class="bi bi-eye"> <b> Ver todas </b></i></a></div>
+
                 </div>
             </div>
 

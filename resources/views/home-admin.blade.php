@@ -17,12 +17,7 @@
             <div class="container">
                 <a class="navbar-brand" href="">Moodle PHP</a>
                 <div class="left_navbar d-flex gap-4">
-                    <a class="nav-link" href="#"> <?php echo  '<i class="bi bi-person-circle" style="margin-right: 10px"></i><b>"</b>"'; ?>
-                    <?php if (!empty($_SESSION['student_name'])) {
-                            echo '<a class="nav-link" href="logout.php">Cerrar sesión</a>';
-                        } else {
-                            echo '';
-                        }; ?>
+                    <a class="nav-link" href="#"><i class="bi bi-person-circle" style="margin-right: 10px"></i><b>{{ $admin -> name }}</b>
                 </a>
                 </div>
             </div>

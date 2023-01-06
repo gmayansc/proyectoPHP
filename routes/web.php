@@ -18,6 +18,8 @@ Route::get('/',[LoginController::class, 'getRoute']);
 Route::get('/login-check',[Authentication::class, 'login']);
 Route::get('/login-admin-check',[Authentication::class, 'loginAdmin']);
 Route::get('/login-admin',[LoginAdminController::class, 'getRoute']);
+Route::get('/logout',[Authentication::class, 'logout']);
+
 
 Route::get('/register',[RegisterController::class, 'getRoute']);
 Route::get('/register-check',[Authentication::class, 'registerStudent']);

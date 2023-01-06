@@ -23,7 +23,12 @@ class HomeController extends Controller
         $courses = Course::all();
         $enrollments = Enrollment::all();
 
-        return view('home', ["invalid" => false, "student" => $student, "courses" => $courses, "schedules" => $schedules, "classes" => $classes, "enrollments" => $enrollments]);
+        if($student){
+            return view('home', ["invalid" => false, "student" => $student, "courses" => $courses, "schedules" => $schedules, "classes" => $classes, "enrollments" => $enrollments]);
+        } else {
+            return view('index',["invalid" => false]);
+        }
+
 
     }
 
@@ -39,6 +44,7 @@ class HomeController extends Controller
 
         return view('modify-profile', [ "student" => $student]);
     }
+
 
     public function updateProfile(Request $request){
 

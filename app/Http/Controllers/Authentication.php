@@ -33,6 +33,12 @@ class Authentication extends BaseController
         return view('index', ["invalid" => true]);
     }
 
+    public function logout(){
+        Cookie::forget('id');
+        return view('index', ["invalid" => false]);
+    }
+
+
     // Login function
     function loginAdmin(Request $request)
     {
@@ -46,7 +52,7 @@ class Authentication extends BaseController
             return view('login-admin', ["invalid" => true]);
         }
 
-        return view('home-admin', ["invalid" => true]);
+        return view('login-admin', ["done" => false]);
     }
     // Sign in funtion
     function registerStudent(Request $request)
