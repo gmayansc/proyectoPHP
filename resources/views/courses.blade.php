@@ -55,7 +55,7 @@
                                         <tbody>
                                             @foreach ($courses as $course)
                                             <tr>
-                                                <td>{{$course->id}}</td>
+                                                <td>{{$course->id_course}}</td>
                                                 <td>{{$course->name}}</td>
                                                 <td>{{$course->description}}</td>
                                                 <td>{{$course->date_start}}</td>
@@ -66,12 +66,14 @@
                                                     echo "<td> NO </td>";
                                                 } ?>
                                                 <td>
-                                                    <!-- <a href="update-courses.php?id={{$course->id}}" class="mr-3" title="Update Record" data-toggle="tooltip"><span class="fa fa-pencil"></span></a>
-                                                    <a href="delete-courses?id='. $row['id'] .'" title="Delete Record" data-toggle="tooltip"></a> -->
-
+                                                    <form method='POST' action='/update-course'>
+                                                        @csrf
+                                                        <input type='hidden' value='{{ $course->id_course }}' name='id' />
+                                                        <button type='submit'><span class="fa fa-pencil">Update</span></button>
+                                                    </form>
                                                     <form method='POST' action='/delete-courses'>
                                                         @csrf
-                                                        <input type='hidden' value='{{ $course->id }}' name='id' />
+                                                        <input type='hidden' value='{{ $course->id_course }}' name='id' />
                                                         <button type='submit'><span class="fa fa-trash">Borrar</span></button>
                                                     </form>
 

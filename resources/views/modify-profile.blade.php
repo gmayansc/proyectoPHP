@@ -58,7 +58,7 @@
                             <input type="text" class="form-control" name="nif" placeholder="41888772X" value="{{$student->nif}}">
                         </div>
                         <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                            <input class="form-check-input" type="checkbox" id="notifications">
                             <label class="form-check-label" for="flexCheckDefault">
                                 Recibir notificaciones por email
                             </label>

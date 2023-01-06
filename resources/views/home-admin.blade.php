@@ -32,7 +32,7 @@
 
             <div class="col">
                 <div class="row gap-3">
-                    <a class="col" href="register-professor">
+                    <a class="col" href="courses">
                         <div role="button" class="add_card large blue d-flex align-items-center col">
                             <h3 class="text-white">Gestionar cursos</h3>
                         </div>

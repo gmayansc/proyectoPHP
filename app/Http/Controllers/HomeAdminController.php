@@ -14,11 +14,11 @@ class HomeAdminController extends Controller
         $admin_id =  Cookie::get('id_admin');
 
         $admin = Admin::find($admin_id);
-        
+
         if($admin){
-            return view('home-admin', ["admin" => $admin]);
+            return view('home-admin', ["admin" => $admin, "done" => true]);
         } else {
-            return view('login-admin', ["admin" => $admin]);
+            return view('login-admin', ["admin" => $admin, "done" => true]);
         }
     }
 

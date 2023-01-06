@@ -73,12 +73,10 @@
                             <input  required type="submit" class="btn mt-3 btn-primary" value="Registrarme como estudiante"><br>
                         </div>
                     </form>
-                    @if (!$done)
-                        <h5 style="color:red">Los datos introducidos son incorrectos</h5>
+                    @if (!$done && $duplicado)
+                        <h5 style="color:red">Ya existe un correo igual registrado en el sistema.</h5>
                     @endif
 
-                
-                    <a href="/register-test">TEST</a>
                     ¿Ya tienes cuenta? <a href="/">Inicia sesión aquí.</a>
                 </div>
             </div>

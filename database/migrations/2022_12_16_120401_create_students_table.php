@@ -22,6 +22,7 @@ return new class extends Migration
             $table->string('surname');
             $table->string('telephone');
             $table->string('username');
+            $table->string('notifications');
             $table->dateTime('date_registered');
             $table->timestamps();
         });

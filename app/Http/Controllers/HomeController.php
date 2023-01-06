@@ -51,13 +51,21 @@ class HomeController extends Controller
             $student_id = $request->input('student_id');
             
             $student = Student::find($student_id);
-            // Cambia el estado del curso dependiendo del valor que ingresa
+            $not = "false";
+            
+            $notificaciones = $request->input('notifications');
+            if($notificaciones == "on"){
+                $not = "true";
+            }
+
+            // Cambia el estado del usuario dependiendo del valor que ingresa
             $student->name =  $request->input('name');
             $student->surname =  $request->input('surname');
             $student->username =  $request->input('username');
             $student->pass =  $request->input('password');
             $student->nif =  $request->input('nif');
             $student->telephone =  $request->input('telephone');
+            $student->notifications = $not;
             // Guarda la fila
             $student->save();
             return redirect('/home');

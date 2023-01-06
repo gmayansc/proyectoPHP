@@ -44,6 +44,8 @@ Route::get('/calendar',[HomeController::class, 'getCalendar']);
 Route::get('/courses',[CourseController::class, 'getRoute']);
 Route::post('/courses', [CourseController::class, 'createCourse']);
 Route::post('/delete-courses', [CourseController::class, 'deleteCourse']);
+Route::post('/update-course', [CourseController::class, 'getUpdateCourseRoute']);
+Route::get('/update-course-submit', [CourseController::class, 'updateCourse']);
 
 
 //CLASSES ROUTES

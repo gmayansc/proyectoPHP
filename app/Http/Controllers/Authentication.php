@@ -49,7 +49,7 @@ class Authentication extends BaseController
                 Cookie::queue('id_admin', $admin->id_admin, 200);
                 return redirect('/home-admin');
             }
-            return view('login-admin', ["invalid" => true]);
+            return view('login-admin', ["invalid" => true, "done" => false]);
         }
 
         return view('login-admin', ["done" => false]);
@@ -59,16 +59,22 @@ class Authentication extends BaseController
     {
         $now = new DateTime();
         try {
-            Student::create([
-                "username" => $request->input('username'),
-                "pass" => $request->input('pass'),
-                "email" => $request->input('email'),
-                "name" => $request->input('name'),
-                "surname" => $request->input('surname'),
-                "telephone" => $request->input('telephone'),
-                "nif" => $request->input('nif'),
-                "date_registered" => $now,
-            ]);
+            $student = Student::where('email', '=', $request->input('email'))->first();
+            if ($student === null) {
+                Student::create([
+                    "username" => $request->input('username'),
+                    "pass" => $request->input('pass'),
+                    "email" => $request->input('email'),
+                    "name" => $request->input('name'),
+                    "surname" => $request->input('surname'),
+                    "telephone" => $request->input('telephone'),
+                    "nif" => $request->input('nif'),
+                    "notifications" => "false",
+                    "date_registered" => $now,
+                ]);
+            } else {
+                return view('register', ["done" => false, "duplicado" => true]);
+            }
 
         } catch (\Illuminate\Database\QueryException $e) {
 
@@ -88,15 +94,16 @@ class Authentication extends BaseController
     // Sign in funtion
     function registerAdmin(Request $request)
     {
-        $variable = $request->input('name');
-        echo "<script>console.log('$variable');</script>";  
         try {
+            $admin = Admin::where('email', '=', $request->input('email'))->first();
+            if ($admin === null) {
             Admin::create([
                 "username" => $request->input('username'),
                 "pass" => $request->input('pass'),
                 "email" => $request->input('email'),
                 "name" => $request->input('name')
             ]);
+            }
         } catch (\Illuminate\Database\QueryException $e) {
             // Si hay error duplicado
             $errorCode = $e->errorInfo[1];
@@ -105,7 +112,7 @@ class Authentication extends BaseController
             }
             return view('register-admin');
         }
-        return view('login-admin');
+        return view('login-admin', ["done" => true]);
     }
 
 
