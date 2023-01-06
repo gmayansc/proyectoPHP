@@ -31,13 +31,26 @@ class ClasseController extends BaseController
 
     function createClasse(Request $request)
     {
-        Classe::create([
-            "id_teacher" => $request->input('id_teacher'),
-            "id_course" => $request->input('id_course'),
-            "id_schedule" => $request->input('id_schedule'),
-            "name" => $request->input('name'),
-            "color" => $request->input('color'),
+        $class = Classe::create([
+            'name' => $request->input('name'),
+            'id_teacher' => $request->input('id_teacher'),
+            'id_schedule' => 0,
+            'id_course' => $request->input('id_course'),
+            'color' => $request->input('color'),
         ]);
+        
+        $schedule = Schedule::create([
+            'id_class' => $class->id_class,
+            'continuous_assessment' => 0,
+            'time_start' => $request->input('time_start'),
+            'time_end' => $request->input('time_end'),
+            'day' => $request->input('day'),
+        ]);
+        
+        $class->update([
+            'id_schedule' => $schedule->id_schedule,
+        ]);
+        
         return redirect('classes');
     }
 

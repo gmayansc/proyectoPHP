@@ -9,7 +9,7 @@ class Schedule extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['id_class', 'time_start', 'time_end', 'day'];
+    protected $fillable = ['id_class','continuous_assessment', 'time_start', 'time_end', 'day'];
     protected $primaryKey = 'id_schedule';
 
 

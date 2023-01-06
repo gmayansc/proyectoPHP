@@ -10,6 +10,8 @@ class Classe extends Model
     use HasFactory;
     protected $fillable = ['name', 'color', 'id_course', 'id_schedule', 'id_teacher'];
     protected $table = 'classes';
+    protected $primaryKey = 'id_class';
+
 
     public function teacher()
     {

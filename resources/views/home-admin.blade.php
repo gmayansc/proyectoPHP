@@ -54,14 +54,9 @@
                             <h3 class="text-white">Ver alumnos</h3>
                         </div>
                     </a>
-                    <a class="col" href="register-professor">
+                    <a class="col" href="exams">
                         <div role="button" class="add_card large orange d-flex align-items-center col">
                             <h3 class="text-white">Añadir exámenes</h3>
-                        </div>
-                    </a>
-                    <a class="col" href="register-professor">
-                        <div role="button" class="add_card large green d-flex align-items-center col">
-                            <h3 class="text-white">Creación de horarios</h3>
                         </div>
                     </a>
                 </div>
