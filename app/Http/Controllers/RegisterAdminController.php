@@ -8,7 +8,8 @@ class RegisterAdminController extends Controller
 {
     
     public function getRoute() {
-        return view('register-admin');
+        $done = true;
+        return view('register-admin',['done' => $done]);
     }
 
 }

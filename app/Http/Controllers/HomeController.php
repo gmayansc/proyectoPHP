@@ -23,7 +23,7 @@ class HomeController extends Controller
         $courses = Course::all();
         $enrollments = Enrollment::all();
 
-        return view('home', ["student" => $student, "courses" => $courses, "schedules" => $schedules, "classes" => $classes, "enrollments" => $enrollments]);
+        return view('home', ["invalid" => false, "student" => $student, "courses" => $courses, "schedules" => $schedules, "classes" => $classes, "enrollments" => $enrollments]);
 
     }
 

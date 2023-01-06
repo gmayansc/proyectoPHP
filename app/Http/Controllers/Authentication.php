@@ -12,6 +12,7 @@ use App\Models\Student;
 use App\Models\Teacher;
 use App\Models\Admin;
 use Illuminate\Support\Facades\Cookie;
+use DateTime;
 
 class Authentication extends BaseController
 {
@@ -19,8 +20,7 @@ class Authentication extends BaseController
 
 
     // Login function
-    function login(Request $request)
-    {
+    function login(Request $request)    {
         $student = Student::where('email', $request->input('email'))->first();
 
         if ($student) {
@@ -49,10 +49,10 @@ class Authentication extends BaseController
 
         return view('login-admin', ["invalid" => true]);
     }
-
     // Sign in funtion
-    function register(Request $request)
+    function registerStudent(Request $request)
     {
+        $now = new DateTime();
         try {
             Student::create([
                 "username" => $request->input('username'),
@@ -62,23 +62,29 @@ class Authentication extends BaseController
                 "surname" => $request->input('surname'),
                 "telephone" => $request->input('telephone'),
                 "nif" => $request->input('nif'),
+                "date_registered" => $now,
             ]);
+
         } catch (\Illuminate\Database\QueryException $e) {
+
             // Si hay error duplicado
             $errorCode = $e->errorInfo[1];
             if ($errorCode == '1062') {
                 return view('register', ["done" => false, "duplicado" => true]);
             }
-            return view('register');
+
+            return view('register', ["done" => false]);
         }
-        return view('home');
+        return view('index', ["invalid" => false]);
     }
+
+
 
     // Sign in funtion
     function registerAdmin(Request $request)
     {
         $variable = $request->input('name');
-echo "<script>console.log('$variable');</script>";  
+        echo "<script>console.log('$variable');</script>";  
         try {
             Admin::create([
                 "username" => $request->input('username'),
@@ -94,7 +100,7 @@ echo "<script>console.log('$variable');</script>";
             }
             return view('register-admin');
         }
-        return view('home-admin');
+        return view('login-admin');
     }
 
 

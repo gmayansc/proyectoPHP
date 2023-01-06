@@ -37,45 +37,48 @@
             <div class="card-body d-flex justify-content-center">
                 <div class="student-info col-10 ">
 
-                    <form class="row g-3 mb-3" action="/register-student" method="get">
-                    @csrf
+                    <form class="row g-3 mb-3" action="/register-check" method="get">
                         <h5 class="mt-5">Datos personales</h5>
                         <div class="col-md-4">
                             <label for="inputEmail4" class="form-label">Nombre</label>
-                            <input type="text" class="form-control" name="name" placeholder="Juan">
+                            <input  required type="text" class="form-control" name="name" placeholder="Juan">
                         </div>
                         <div class="col-md-4">
                             <label for="inputEmail4" class="form-label">Apellido</label>
-                            <input type="text" class="form-control" name="surname" placeholder="Pérez">
+                            <input  required type="text" class="form-control" name="surname" placeholder="Pérez">
                         </div>
                         <div class="col-md-4">
                             <label for="inputEmail4" class="form-label">Nombre de usuario</label>
-                            <input type="text" class="form-control" name="username" placeholder="@jperez94">
+                            <input  required type="text" class="form-control" name="username" placeholder="@jperez94">
                         </div>
                         <h5 class="mt-5">Tus datos de acceso</h5>
                         <div class="col-md-8">
                             <label for="inputEmail4" class="form-label">Email</label>
-                            <input type="email" class="form-control" name="email" placeholder="j.perez@uoc.edu">
+                            <input  required type="email" class="form-control" name="email" placeholder="j.perez@uoc.edu">
                         </div>
                         <div class="col-md-4">
                             <label for="inputPassword4" class="form-label">Contraseña</label>
-                            <input type="password" class="form-control" name="pass" placeholder="12345678">
+                            <input  required type="password" class="form-control" name="pass" placeholder="12345678">
                         </div>
                         <h5 class="mt-5">Otra información</h5>
                         <div class="col-4">
                             <label for="inputAddress" class="form-label">Teléfono</label>
-                            <input type="text" class="form-control" name="telephone" placeholder="+34 600 123 444">
+                            <input  required type="text" class="form-control" name="telephone" placeholder="+34 600 123 444">
                         </div>
                         <div class="col-4">
                             <label for="inputAddress2" class="form-label">NIF</label>
-                            <input type="text" class="form-control" name="nif" placeholder="41888772X">
+                            <input  required type="text" class="form-control" name="nif" placeholder="41888772X">
                         </div>
                         <div class="col-12">
-                            <input type="submit" class="btn mt-3 btn-primary" value="Registrarme como estudiante"><br>
+                            <input  required type="submit" class="btn mt-3 btn-primary" value="Registrarme como estudiante"><br>
                         </div>
                     </form>
-                
+                    @if (!$done)
+                        <h5 style="color:red">Los datos introducidos son incorrectos</h5>
+                    @endif
 
+                
+                    <a href="/register-test">TEST</a>
                     ¿Ya tienes cuenta? <a href="/">Inicia sesión aquí.</a>
                 </div>
             </div>

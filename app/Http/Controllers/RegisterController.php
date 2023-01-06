@@ -8,7 +8,8 @@ class RegisterController extends Controller
 {
     
     public function getRoute() {
-        return view('register');
+        $done = true;
+        return view('register',['done' => $done]);
     }
 
 }
