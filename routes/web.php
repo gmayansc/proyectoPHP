@@ -8,6 +8,8 @@ use App\Http\Controllers\RegisterAdminController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\HomeAdminController;
 use App\Http\Controllers\CourseController;
+use App\Http\Controllers\TeacherController;
+use App\Http\Controllers\StudentController;
 use App\Http\Controllers\ClasseController;
 use App\Http\Controllers\Authentication;
 
@@ -50,8 +52,15 @@ Route::get('/update-course-submit', [CourseController::class, 'updateCourse']);
 
 //CLASSES ROUTES
 Route::get('/classes',[ClasseController::class, 'getRoute']);
-Route::post('/classes', [ClasseController::class, 'createClasse']);
+Route::get('/create-classes', [ClasseController::class, 'createClasse']);
 Route::post('/delete-classes', [ClasseController::class, 'deleteClasse']);
+
+//TEACHERS ROUTES
+Route::get('/teachers',[TeacherController::class, 'getRoute']);
+Route::post('/teachers', [TeacherController::class, 'createTeacher']);
+
+//TEACHERS ROUTES
+Route::get('/students',[StudentController::class, 'getRoute']);
 
 
 /*

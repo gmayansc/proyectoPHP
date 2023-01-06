@@ -57,7 +57,7 @@
                                                 <td>{{$classe->schedule->time_start}}</td>
                                                 <td>{{$classe->schedule->time_end}}</td>
                                                 <td>
-                                                    <div style="height: 30px; width:100%; background-color:{{$classe->color}}; border-radius:2px;">
+                                                    <div style="height: 30px; width:100%; background-color: {{$classe->color}}; border-radius:2px;" >
                                                 </td>
                                                 <td>
                                                     <form method='POST' action='/delete-classes'>
@@ -82,37 +82,35 @@
                             <div id="panelsStayOpen-collapseTwo" class="accordion-collapse collapse" aria-labelledby="panelsStayOpen-headingTwo">
                                 <div class="accordion-body">
                                     <h2>Crear nueva clase</h2>
-                                    <form class="col-5 m-auto" method='POST' action='/classes'>
+                                    <form class="col-5 m-auto" method='get' action='/create-classes'>
                                         @csrf
                                         <div>
                                             <span>Escoja el profesor</span>
-                                            <select class='form-control mb-2' placeholder='Nombre del profesor' name='id_teacher'>
+                                            <select required class='form-control mb-2' placeholder='Nombre del profesor' name='id_teacher'>
                                                 @foreach ($teachers as $teacher)
-                                                <option disabled selected>Seleccione</option>
                                                 <option value="{{ $teacher->id_teacher }}">{{ $teacher->name }}</option>
                                                 @endforeach
                                             </select>
                                         </div>
                                         <div>
                                             <span>Escoja el curso</span>
-                                            <select class='form-control mb-2' placeholder='Nombre del curso' name='id_course'>
+                                            <select required class='form-control mb-2' placeholder='Nombre del curso' name='id_course'>
                                                 @foreach ($courses as $course)
-                                                <option disabled selected>Seleccione</option>
                                                 <option value="{{ $course->id }}">{{ $course->name }}</option>
                                                 @endforeach
                                             </select>
                                         </div>
                                         <div>
                                             <span>Nombre de la clase</span>
-                                            <input  class='form-control mb-2'placeholder='Nombre de la clase' name='name' />
+                                            <input required  class='form-control mb-2'placeholder='Nombre de la clase' name='name' />
                                         </div>
                                         <div>
                                             <span>Color de la clase</span>
-                                            <input class='form-control mb-2' placeholder='Color de la clase' type='color' name='color'/>
+                                            <input required class='form-control mb-2' placeholder='Color de la clase' type='color' name='color'/>
                                         </div>
                                         <div>
                                             <span>Horario de la clase</span>
-                                            <select class='form-control mb-2' placeholder='Horario para la clase' name='id_schedule'>
+                                            <select required class='form-control mb-2' placeholder='Horario para la clase' name='id_schedule'>
                                                 <option disabled selected>Seleccione</option>
                                                 @foreach ($schedules as $schedule)
                                                 <option value='{{ $schedule->id_schedule }}'>Fecha: {{ $schedule->day }} | Hora Inicio: {{ $schedule->time_start }} | Hora fin: {{ $schedule->time_end}}</option>
