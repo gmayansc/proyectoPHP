@@ -46,7 +46,7 @@
               <button type="submit" class="btn btn-primary">Entrar</a></button><br>
             </div>
           </form>
-        @if ($invalid)
+        @if (!$done)
         <h5 style="color:red">Los datos introducidos son incorrectos</h5>
         @endif
           

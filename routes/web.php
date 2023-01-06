@@ -30,7 +30,10 @@ Route::get('/register-admin-check',[Authentication::class, 'registerAdmin']);
 //HOME ROUTES
 Route::get('/home',[HomeController::class, 'getRoute']);
 Route::get('/home-admin',[HomeAdminController::class, 'getRoute']);
-Route::get('/modify-profile', [HomeController::class, 'getRoute']);
+Route::get('/modify-profile', [HomeController::class, 'modifyProfile']);
+Route::get('/modify-profile-submit', [HomeController::class, 'updateProfile']);
+
+
 Route::get('/calendar',[HomeController::class, 'getCalendar']);
 
 

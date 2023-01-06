@@ -47,11 +47,9 @@
               <button type="submit" class="btn btn-primary">Entrar</a></button><br>
             </div>
           </form>
-        @if ($invalid)
-        <h2 style="color:red">Datos introducidos son incorrectos</h2>
-        @endif
-          
-
+          @if ($invalid)
+          <h2 style="color:red">Datos introducidos son incorrectos</h2>
+          @endif
           ¿No tienes cuenta? <a href="register">Regístrate aquí.</a>
         </div>
       </div>

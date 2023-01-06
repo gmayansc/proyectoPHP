@@ -18,80 +18,62 @@
                 <a class="navbar-brand" href="">Moodle PHP</a>
                 <div class="left_navbar d-flex gap-4">
                     <a class="nav-link" href="#"> <?php echo  '<i class="bi bi-person-circle" style="margin-right: 10px"></i><b>"</b>"'; ?>
-                        <?php
-                        /* if (!empty($_SESSION['admin_name'])) {
+                    <?php if (!empty($_SESSION['student_name'])) {
                             echo '<a class="nav-link" href="logout.php">Cerrar sesión</a>';
                         } else {
                             echo '';
-                        }; */?></a>
+                        }; ?>
+                </a>
                 </div>
             </div>
         </nav>
     </header>
     <section class="container administrator-panel">
 
+    <section class="container administrator-panel">
+
 
         <div class="row mt-5 gap-3 justify-content-between">
 
             <div class="col">
-                <div class="row">
-                    <a href="register-professor"><div role="button" class="add_card large blue d-flex justify-content-center align-items-center col">
-                        <h3 class="text-white">Agregar profesor</h3>
-                    </div></a>
+                <div class="row gap-3">
+                    <a class="col" href="register-professor">
+                        <div role="button" class="add_card large blue d-flex align-items-center col">
+                            <h3 class="text-white">Gestionar cursos</h3>
+                        </div>
+                    </a>
+                    <a class="col" href="register-professor">
+                        <div role="button" class="add_card large orange d-flex align-items-center col">
+                            <h3 class="text-white">Gestionar clases</h3>
+                        </div>
+                    </a>
+                    <a class="col" href="register-professor">
+                        <div role="button" class="add_card large green d-flex align-items-center col">
+                            <h3 class="text-white">Gestionar profesores</h3>
+                        </div>
+                    </a>
                 </div>
-
-                <div class="row mt-2 gap-3">
-                <a href="students"><div role="button" class="add_card green d-flex justify-content-center align-items-center col">
-                        <h5 class="text-white"><i class="bi bi-file-person-fill"></i> Ver alumnos</h5>
-                    </div></a>
-                    <a href="teachers"><div role="button" class="add_card  orange d-flex justify-content-center align-items-center col">
-                        <h5 class="text-white"><i class="bi bi-person-vcard-fill"></i> Todos los profesores</h5>
-                    </div></a>
+                <div class="row mt-3 gap-3">
+                    <a class="col" href="register-professor">
+                        <div role="button" class="add_card large blue d-flex align-items-center col">
+                            <h3 class="text-white">Ver alumnos</h3>
+                        </div>
+                    </a>
+                    <a class="col" href="register-professor">
+                        <div role="button" class="add_card large orange d-flex align-items-center col">
+                            <h3 class="text-white">Añadir exámenes</h3>
+                        </div>
+                    </a>
+                    <a class="col" href="register-professor">
+                        <div role="button" class="add_card large green d-flex align-items-center col">
+                            <h3 class="text-white">Gestionar otras cosas</h3>
+                        </div>
+                    </a>
                 </div>
-
-
             </div>
-            <div class="col">
-                <div class="row">
-                <a href="courses"><div role="button" class="add_card large blue d-flex justify-content-center align-items-center col">
-                        <h3 class="text-white">Ver todos los cursos</h3>
-                    </div></a>
-                </div>
-
-                <div class="row mt-2 gap-3">
-                <a href="courses"><div role="button" class="add_card green d-flex justify-content-center align-items-center col">
-                        <h5 class="text-white"><i class="bi bi-bookmark-plus"></i>  Añadir un curso</h5>
-                    </div></a>
-                    <a href="courses"><div role="button" class="add_card  orange d-flex justify-content-center align-items-center col">
-                        <h5 class="text-white"><i class="bi bi-bookmark-dash"></i>  Eliminar un curso</h5>
-                    </div></a>
-                </div>
-
-
-            </div>
-
-            <div class="col">
-                <div class="row">
-                <a href="classes"><div role="button" class="add_card large blue d-flex justify-content-center align-items-center col">
-                        <h3 class="text-white">Ver todas las clases</h3>
-                    </div></a>
-                </div>
-
-                <div class="row mt-2 gap-3">
-                <a href="classes"><div role="button" class="add_card green d-flex justify-content-center align-items-center col">
-                        <h5 class="text-white"><i class="bi bi-file-earmark-plus-fill"></i> Añadir una clase</h5>
-                    </div></a>
-                    <a href="classes"><div role="button" class="add_card  orange d-flex justify-content-center align-items-center col">
-                        <h5 class="text-white"><i class="bi bi-file-earmark-x-fill"></i> Eliminar una clase</h5>
-                    </div></a>
-                </div>
-
-            </div>
-
-        </div>
-
-
     </section>
+
+
 </body>
 
 </html>

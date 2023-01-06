@@ -30,7 +30,6 @@ class Authentication extends BaseController
             }
             return view('index', ["invalid" => true]);
         }
-
         return view('index', ["invalid" => true]);
     }
 
@@ -47,7 +46,7 @@ class Authentication extends BaseController
             return view('login-admin', ["invalid" => true]);
         }
 
-        return view('login-admin', ["invalid" => true]);
+        return view('home-admin', ["invalid" => true]);
     }
     // Sign in funtion
     function registerStudent(Request $request)

@@ -44,7 +44,7 @@
             <div class="container">
                 <a class="navbar-brand" href="">Moodle PHP</a>
                 <div class="left_navbar d-flex gap-4">
-                    <a class="nav-link" href="modify-profile.php?student_id=<?php echo 'test' ?>"><i class="bi bi-person-circle" style="margin-right: 10px"></i><b> {{ $student->name }} {{ $student->surname }} </b>
+                    <a class="nav-link" href="modify-profile"><i class="bi bi-person-circle" style="margin-right: 10px"></i><b> {{ $student->name }} {{ $student->surname }} </b>
                         <?php if (!empty($_SESSION['student_name'])) {
                             echo '<a class="nav-link" href="logout.php">Cerrar sesión</a>';
                         } else {
@@ -69,6 +69,7 @@
                     <div><b>Teléfono:</b> {{$student->telephone}} </div>
                     <div><b>NIF: </b> {{$student->nif}} </div>
                     <div><b>Fecha de registro:</b> {{$student->date_registered}} </div>
+                    <div><b>Notificaciones:</b> NO </div>
                     <div class="mt-2"><a href="modify-profile"> <i role="button" class="bi bi-pencil-square"> <b> Editar perfil </b></i></a></div>
                 </div>
             </div>
