@@ -25,4 +25,8 @@ class Classe extends Model
     {
         return $this->belongsTo(Schedule::class, 'id_schedule');
     }
+    public function exams()
+    {
+        return $this->hasMany('App\Examen', 'classe_id')->onDelete('cascade');
+    }
 }

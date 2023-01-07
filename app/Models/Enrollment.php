@@ -9,10 +9,9 @@ class Enrollment extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'course_id',
-        'student_id',
+        'id_course',
+        'id_student',
         'status',
-        'id_enrollment',
     ];
 
     protected $table = 'enrollment';
@@ -24,6 +23,11 @@ class Enrollment extends Model
         return $this->belongsTo(Course::class, 'id_course');
     }
 
+    public function classe()
+    {
+        return $this->belongsTo(Classe::class, 'id_classe');
+    }
+
     public function student()
     {
         return $this->belongsTo(Student::class, 'id_student');
@@ -31,5 +35,9 @@ class Enrollment extends Model
     public function schedule()
     {
         return $this->belongsTo(Schedule::class, 'id_schedule');
+    }
+    public function teacher()
+    {
+        return $this->belongsTo(Teacher::class, 'id_teacher');
     }
 }

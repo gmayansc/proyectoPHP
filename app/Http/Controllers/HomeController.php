@@ -8,6 +8,7 @@ use App\Models\Course;
 use App\Models\Schedule;
 use App\Models\Classe;
 use App\Models\Enrollment;
+use App\Models\Exam;
 
 class HomeController extends Controller
 {
@@ -18,13 +19,30 @@ class HomeController extends Controller
 
         $student = Student::find($student_id);
 
+        $exams = Exam::where('id_student', $student_id)->get();
+
         $schedules = Schedule::all();
-        $classes = Classe::all();
+        
+        
         $courses = Course::all();
-        $enrollments = Enrollment::all();
+
+
+
+        // $enrollments = Enrollment::where('id_student', $student_id)->get();
+     $enrollments = Enrollment::join('courses', 'enrollment.id_course', '=', 'courses.id_course')
+        ->join('classes', 'enrollment.id_course', '=', 'classes.id_course')
+        ->join('teachers', 'classes.id_teacher', '=', 'teachers.id_teacher')
+        ->join('schedules', 'classes.id_schedule', '=', 'schedules.id_schedule')
+        ->join('students', 'enrollment.id_student', '=', 'students.id_student')
+        ->select('schedules.time_start', 'teachers.name as Profesor', 'schedules.day as Dia', 'courses.name as Curso', 'students.name as Alumno', 'classes.name as Asignatura')
+        ->where('enrollment.id_student', $student_id)
+        ->get();
+
+
+    
 
         if($student){
-            return view('home', ["invalid" => false, "student" => $student, "courses" => $courses, "schedules" => $schedules, "classes" => $classes, "enrollments" => $enrollments]);
+            return view('home', ["invalid" => false, "exams"=>$exams, "student" => $student, "courses" => $courses, "schedules" => $schedules, "enrollments" => $enrollments, "enrollments" => $enrollments]);
         } else {
             return view('index',["invalid" => false]);
         }
@@ -69,6 +87,21 @@ class HomeController extends Controller
             // Guarda la fila
             $student->save();
             return redirect('/home');
+    } 
+
+    public function enrollment(Request $request){
+
+            $id_student = $request->input('id_student');
+            $id_course = $request->input('id_course');
+
+            Enrollment::create([
+                'id_student' => $id_student,
+                'id_course' => $id_course,
+                'status' => "0",
+            ]);
+
+            return redirect('/home');
+
 
     }
 

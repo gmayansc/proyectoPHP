@@ -73,7 +73,7 @@ class ClasseController extends BaseController
         $id_class = $request->get('id');
         $classe = Classe::find($id_class);
         $classe->delete();
-        return redirect('/Classes');
+        return redirect('/classes');
     }
 
 }

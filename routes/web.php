@@ -11,6 +11,7 @@ use App\Http\Controllers\CourseController;
 use App\Http\Controllers\TeacherController;
 use App\Http\Controllers\StudentController;
 use App\Http\Controllers\ClasseController;
+use App\Http\Controllers\ExamController;
 use App\Http\Controllers\Authentication;
 
 
@@ -38,7 +39,8 @@ Route::get('/modify-profile', [HomeController::class, 'modifyProfile']);
 Route::get('/modify-profile-submit', [HomeController::class, 'updateProfile']);
 
 
-Route::get('/calendar',[HomeController::class, 'getCalendar']);
+Route::post('/enrollment',[HomeController::class, 'enrollment']);
+
 
 
 
@@ -59,37 +61,12 @@ Route::post('/delete-classes', [ClasseController::class, 'deleteClasse']);
 Route::get('/teachers',[TeacherController::class, 'getRoute']);
 Route::post('/teachers', [TeacherController::class, 'createTeacher']);
 
-//TEACHERS ROUTES
+//STUDENTS ROUTES
 Route::get('/students',[StudentController::class, 'getRoute']);
 
 
-/*
+//EXAMS RROUTES
+Route::get('/exams',[ExamController::class, 'getRoute']);
+Route::post('/exams', [ExamController::class, 'createExam']);
 
-////////  HAY QUE CREAR UN CONTROLADOR POR CADA RUTA O CONJUNTO (CoursesController, ClassesController, etc.). 
-////////  Dentro de cada controlador crear un método que devuelva la vista correspondiente HTML
 
-
-Route::get('/classes');
-Route::get('/courses');
-Route::get('/create-classes');
-Route::get('/create-courses');
-Route::get('/delete-courses');
-Route::get('/delete-admins');
-Route::get('/delete-classes');
-Route::get('/delete-teachers');
-Route::get('/edit-profile');
-Route::get('/home-admin');
-Route::get('/home');
-Route::get('/login-admin');
-Route::get('/login-professor');
-Route::get('/logout');
-Route::get('/modify-profile');
-Route::get('/register-admin');
-Route::get('/register-professor');
-Route::get('/register');
-Route::get('/students');
-Route::get('/teachers');
-Route::get('/update-classes');
-Route::get('/update-courses');
-Route::get('/update-teachers');
-*/

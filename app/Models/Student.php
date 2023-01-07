@@ -11,4 +11,5 @@ class Student extends Model
     protected $fillable = ['username', 'pass', 'email', 'name', 'surname', 'telephone', 'nif', 'notifications', 'date_registered'];
     protected $primaryKey = 'id_student';
 
+
 }

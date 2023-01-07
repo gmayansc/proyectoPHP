@@ -16,7 +16,19 @@
 
             var calendarEl = document.getElementById('calendar');
 
-            console.log('{{$classes}}');
+            var enrollments = @json($enrollments);
+
+            enrollments.forEach(function(enrollment) {
+                enrollment.horaInicio = enrollment.time_start;
+                delete enrollment.time_start;
+                enrollment.profesor = enrollment.Profesor;
+                delete enrollment.Profesor;
+                enrollment.start = enrollment.Dia;
+                delete enrollment.Dia;
+                enrollment.title = enrollment.Asignatura;
+                delete enrollment
+            });
+
 
             var calendar = new FullCalendar.Calendar(calendarEl, {
                 locale: 'es',
@@ -25,13 +37,7 @@
                 headerToolbar: {
                     center: 'dayGridMonth,timeGridWeek'
                 }, // buttons for switching between views
-                events: [
-                    {
-                        title: 'Clase de prueba',
-                        description: 'Clase de prueba 1',
-                        start: '2022-12-07'
-                    },
-                ]
+                events: enrollments
             });
             calendar.render();
         });
@@ -74,21 +80,23 @@
                 </div>
                 <div class="student-info mt-3">
                     <h2 class="student-info__title mb-4"><i class="bi bi-journal-bookmark" style="margin-right: 10px"></i>Mis notas:</h2>
-                        <table class="table">
-                            <thead>
-                                <th>Fecha</th>
-                                <th>Nombre</th>
-                                <th>Nota</th>
-                            </thead>
-                            <tbody>
-                                    <tr><td>20-12-2022</td><td>Matemáticas</td><td>2.5</td></tr>
-                                    <tr><td>20-12-2022</td><td>Matemáticas</td><td>2.5</td></tr>
-                                    <tr><td>20-12-2022</td><td>Matemáticas</td><td>2.5</td></tr>
-                                    <tr><td>20-12-2022</td><td>Matemáticas</td><td>2.5</td></tr>
-                                    <tr><td>20-12-2022</td><td>Matemáticas</td><td>2.5</td></tr>
-                            </tbody>
-                        </table>
-                        <div class="mt-2"><a href="modify-profile"> <i role="button" class="bi bi-eye"> <b> Ver todas </b></i></a></div>
+                    <table class="table">
+                        <thead>
+                            <th>Examen</th>
+                            <th>Asignatura</th>
+                            <th>Nota</th>
+                        </thead>
+                        <tbody>
+                            @foreach ($exams as $exam)
+                            <tr>
+                                <td>{{ $exam->name }}</td>
+                                <td>{{ $exam->classe->name }}</td>
+                                <td>{{ $exam->mark }}</td>
+                            </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                    <!-- <div class="mt-2"><a href="modify-profile"> <i role="button" class="bi bi-eye"> <b> Ver todas </b></i></a></div> -->
 
                 </div>
             </div>
@@ -114,17 +122,15 @@
                         <th>Curso</th>
                         <th>Inicio</th>
                         <th>Profesor</th>
-                        <th>Más</th>
                     </tr>
 
-                    @foreach ($classes as $classe)
+                    @foreach ($enrollments as $enrollment)
                     <tr>
-                        <td>{{ $classe->schedule->day }}</td>
-                        <td>{{ $classe->name }}</td>
-                        <td>{{ $classe->name}}</td>
-                        <td>{{ $classe->schedule->time_start }}</td>
-                        <td>{{ $classe->teacher->name }}</td>
-                        <td> + </td>
+                        <td>{{ $enrollment->Dia}}</td>
+                        <td>{{ $enrollment->Asignatura }}</td>
+                        <td>{{ $enrollment->Curso}}</td>
+                        <td>{{ $enrollment->time_start }}</td>
+                        <td>{{ $enrollment->Profesor }}</td>
                     </tr>
                     @endforeach
                 </table>
@@ -139,28 +145,20 @@
                         <th>Título del curso</th>
                         <th>Matrícularme</th>
                     </tr>
-
-
-
                     @foreach ($courses as $course)
                     <tr>
                         <td>{{ $course->name }}</td>
-                        <td> + </td>
+                        <td>
+
+                            <form method='POST' action='/enrollment'>
+                                @csrf
+                                <input type='hidden' value='{{ $student->id_student }}' name='id_student' />
+                                <input type='hidden' value='{{ $course->id_course }}' name='id_course' />
+                                <button type='submit'><span class="fa fa-pencil"> + </span></button>
+                            </form>
+                        </td>
                     </tr>
                     @endforeach
-
-
-
-                    <?php /*
-                    while ($row = mysqli_fetch_array($resultadoCursos)) {
-                        echo "<tr>";
-                        echo "<td>" . $row['Curso'] . "</td>";
-                        echo "<td> <a href='enrollment.php?student_id=".$student_id."&id_course=" . $row['id_curso'] . "'><i role='button' class='bi bi-plus-square-fill'> Añadir a mis cursos </i></a>";
-                        echo "</tr>";
-                    }
-                    mysqli_free_result($resultadoCursos);
-                    mysqli_close($conn);*/
-                    ?>
                 </table>
             </div>
         </div>

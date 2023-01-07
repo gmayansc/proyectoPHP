@@ -62,7 +62,7 @@
                                                 <td>
                                                     <form method='POST' action='/delete-classes'>
                                                         @csrf
-                                                        <input type='hidden' value='{{ $classe->id }}' name='id' />
+                                                        <input type='hidden' value='{{ $classe->id_class }}' name='id' />
                                                         <button type='submit'><span class="fa fa-trash"></span>BORRAR</button>
                                                     </form>
                                                 </td>
