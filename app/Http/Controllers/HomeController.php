@@ -9,6 +9,7 @@ use App\Models\Schedule;
 use App\Models\Classe;
 use App\Models\Enrollment;
 use App\Models\Exam;
+use App\Models\Work;
 
 class HomeController extends Controller
 {
@@ -20,6 +21,8 @@ class HomeController extends Controller
         $student = Student::find($student_id);
 
         $exams = Exam::where('id_student', $student_id)->get();
+
+        $works = Work::where('id_student', $student_id)->get();
 
         $schedules = Schedule::all();
         
@@ -42,7 +45,7 @@ class HomeController extends Controller
     
 
         if($student){
-            return view('home', ["invalid" => false, "exams"=>$exams, "student" => $student, "courses" => $courses, "schedules" => $schedules, "enrollments" => $enrollments, "enrollments" => $enrollments]);
+            return view('home', ["invalid" => false, "exams"=>$exams,"works"=>$works , "student" => $student, "courses" => $courses, "schedules" => $schedules, "enrollments" => $enrollments, "enrollments" => $enrollments]);
         } else {
             return view('index',["invalid" => false]);
         }

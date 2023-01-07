@@ -12,6 +12,7 @@ use App\Http\Controllers\TeacherController;
 use App\Http\Controllers\StudentController;
 use App\Http\Controllers\ClasseController;
 use App\Http\Controllers\ExamController;
+use App\Http\Controllers\WorkController;
 use App\Http\Controllers\Authentication;
 
 
@@ -65,8 +66,13 @@ Route::post('/teachers', [TeacherController::class, 'createTeacher']);
 Route::get('/students',[StudentController::class, 'getRoute']);
 
 
-//EXAMS RROUTES
+//EXAMS ROUTES
 Route::get('/exams',[ExamController::class, 'getRoute']);
 Route::post('/exams', [ExamController::class, 'createExam']);
+
+
+//WORKS ROUTES
+Route::get('/works',[WorkController::class, 'getRoute']);
+Route::post('/works', [WorkController::class, 'createWork']);
 
 

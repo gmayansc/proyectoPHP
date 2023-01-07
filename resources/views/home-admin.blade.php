@@ -56,7 +56,12 @@
                     </a>
                     <a class="col" href="exams">
                         <div role="button" class="add_card large orange d-flex align-items-center col">
-                            <h3 class="text-white">Añadir exámenes</h3>
+                            <h3 class="text-white">Exámenes</h3>
+                        </div>
+                    </a>
+                    <a class="col" href="works">
+                        <div role="button" class="add_card large green d-flex align-items-center col">
+                            <h3 class="text-white">Trabajos</h3>
                         </div>
                     </a>
                 </div>

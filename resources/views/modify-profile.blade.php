@@ -21,7 +21,7 @@
 
     <div class="container d-flex justify-content-center align-items-center flex-column " style="height:70vh">
 
-        <h2 class="student-info__title mt-5 text-center">Hola, {{$student->name}}. Pudes modificar tus datos aquí: </h2>
+        <h2 class="student-info__title mt-5 text-center">Hola, {{$student->name}}. Puedes modificar tus datos aquí: </h2>
         <div class="card col-6">
             <div class="card-body d-flex justify-content-center">
                 <div class="student-info col-10 ">
@@ -71,7 +71,7 @@
                     </form>
 
 
-                    <a href="/home">Cancelar</a>
+                    <a href="/home"  class="btn mt-2 btn-alert">Cancelar</a>
                 </div>
             </div>
         </div>

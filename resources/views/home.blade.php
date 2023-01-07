@@ -96,6 +96,22 @@
                             @endforeach
                         </tbody>
                     </table>
+                    <table class="table">
+                        <thead>
+                            <th>Trabajo</th>
+                            <th>Asignatura</th>
+                            <th>Nota</th>
+                        </thead>
+                        <tbody>
+                            @foreach ($works as $work)
+                            <tr>
+                                <td>{{ $work->name }}</td>
+                                <td>{{ $work->classe->name }}</td>
+                                <td>{{ $work->mark }}</td>
+                            </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
                     <!-- <div class="mt-2"><a href="modify-profile"> <i role="button" class="bi bi-eye"> <b> Ver todas </b></i></a></div> -->
 
                 </div>
